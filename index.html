@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="description" content="WheelGenerator — Free interactive spin wheel to make random decisions, pick names, yes/no, numbers, colors, and custom choices. Fun, customizable, and easy to use.">
+  <meta name="keywords" content="spin wheel, random picker, wheel generator, yes no wheel, custom wheel, decision maker, spin the wheel">
+  <meta name="author" content="WheelGenerator">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://wheelgenerator.github.io/">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <title>Random Wheel Generator — Free Spin Wheel & Decision Maker</title>
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="WheelGenerator — Spin Wheel Random Picker">
+  <meta property="og:description" content="Create your own wheel, spin to decide, pick winners, or just have fun. Completely free and customizable.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wheelgenerator.github.io/">
+  <meta property="og:image" content="https://wheelgenerator.github.io/og-wheel.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<!-- Header, navbar, footer will be injected by JS components -->
+<div id="header-root"></div>
+  
+<main>
+  <!-- Hero Section -->
+  <section class="hero" aria-label="Hero introduction">
+    <div class="hero-content">
+      <span class="hero-badge">✨ Free & Unlimited Spins ✨</span>
+      <h1>Spin the Wheel & <span>Make Decisions</span> Instantly</h1>
+      <p class="hero-sub">The ultimate random picker – customize your wheel, spin, and let fate decide. Perfect for giveaways, games, classrooms, or any decision.</p>
+      <div class="hero-actions">
+        <a href="#wheel-app" class="btn-primary">🎡 Spin Now →</a>
+        <a href="#wheel-types" class="btn-secondary">✨ Explore Wheels</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">1M+</div><div class="stat-label">Spins this month</div></div>
+        <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Custom wheels</div></div>
+        <div class="stat"><div class="stat-num">⭐ 4.9</div><div class="stat-label">User rating</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wheel Application (Main interactive area) -->
+  <section id="wheel-app" class="section" aria-label="Spin wheel application">
+    <div class="container">
+      <div class="wheel-app-grid">
+        <!-- Wheel canvas + controls -->
+        <div class="wheel-stage">
+          <div class="wheel-canvas-wrap">
+            <canvas id="mainWheel" width="500" height="500" aria-label="Interactive spin wheel" role="img"></canvas>
+            <div id="resultBox" class="result-box">
+              <div class="result-label">🎉 WINNER 🎉</div>
+              <div id="resultText" class="result-value">—</div>
+            </div>
+          </div>
+          <div class="wheel-controls">
+            <button id="spinBtn" class="spin-primary">🔘 SPIN THE WHEEL</button>
+            <div class="wheel-toolbar">
+              <button id="soundToggle" class="toolbar-btn" title="Mute/Unmute sound">🔊</button>
+              <button id="fullscreenBtn" class="toolbar-btn icon-btn" title="Fullscreen wheel">⛶</button>
+              <button id="shareBtn" class="toolbar-btn" title="Share this wheel">🔗 Share Wheel</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel: entries / themes / history / settings -->
+        <div class="wheel-panel">
+          <div class="panel-tabs">
+            <button class="panel-tab active" data-panel="entries">📋 Entries</button>
+            <button class="panel-tab" data-panel="themes">🎨 Themes</button>
+            <button class="panel-tab" data-panel="history">📜 History</button>
+            <button class="panel-tab" data-panel="settings">⚙️ Settings</button>
+          </div>
+          <!-- Entries Panel -->
+          <div id="panel-entries" class="panel-body active">
+            <div class="entries-header">
+              <div class="entries-count" id="entryCount">8</div>
+              <div class="entries-actions">
+                <button id="clearAllBtn" class="action-btn-sm" title="Clear all entries">🗑️ Clear</button>
+                <button id="sortBtn" class="action-btn-sm" title="Sort A-Z">🔤 Sort</button>
+                <button id="shuffleBtn" class="action-btn-sm" title="Shuffle entries">🔄 Shuffle</button>
+                <button id="openBulkBtn" class="action-btn-sm" title="Bulk add">📋 Bulk</button>
+              </div>
+            </div>
+            <div id="entriesList" class="entries-list"></div>
+            <div class="entry-input-row">
+              <input type="text" id="newEntryInput" class="entry-input" placeholder="Add new option..." aria-label="New entry">
+              <button id="addEntryBtn" class="add-btn">+ Add</button>
+            </div>
+          </div>
+          <!-- Themes Panel -->
+          <div id="panel-themes" class="panel-body">
+            <div class="themes-grid">
+              <button class="theme-btn active" data-theme="classic"><span class="theme-swatch"><span style="background:#FF6B6B"></span><span style="background:#4ECDC4"></span><span style="background:#FFE66D"></span></span> Classic</button>
+              <button class="theme-btn" data-theme="neon"><span class="theme-swatch"><span style="background:#FF0080"></span><span style="background:#00FF41"></span><span style="background:#0080FF"></span></span> Neon</button>
+              <button class="theme-btn" data-theme="pastel"><span class="theme-swatch"><span style="background:#FFB3BA"></span><span style="background:#BAFFC9"></span><span style="background:#BAE1FF"></span></span> Pastel</button>
+              <button class="theme-btn" data-theme="dark"><span class="theme-swatch"><span style="background:#2D3436"></span><span style="background:#636E72"></span><span style="background:#74B9FF"></span></span> Dark</button>
+              <button class="theme-btn" data-theme="rainbow"><span class="theme-swatch"><span style="background:#FF0000"></span><span style="background:#00FF00"></span><span style="background:#0000FF"></span></span> Rainbow</button>
+              <button class="theme-btn" data-theme="earth"><span class="theme-swatch"><span style="background:#8B4513"></span><span style="background:#A0522D"></span><span style="background:#DEB887"></span></span> Earth</button>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text3); margin-top: 16px;">Pick a color theme that fits your mood. All entries adapt automatically.</p>
+          </div>
+          <!-- History Panel -->
+          <div id="panel-history" class="panel-body">
+            <div id="historyList" class="history-list-container"><p class="no-history">No spins yet. Spin the wheel!</p></div>
+            <button id="clearHistoryBtn" class="action-btn-sm" style="background:transparent; margin-top: 8px;">🗑️ Clear history</button>
+          </div>
+          <!-- Settings Panel -->
+          <div id="panel-settings" class="panel-body">
+            <div class="settings-row">
+              <div><div class="settings-label">🔇 Remove entry after spin</div><div class="settings-desc">Winner will be removed automatically</div></div>
+              <label class="toggle-switch"><input type="checkbox" id="removeAfterSpin"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="settings-row">
+              <div><div class="settings-label">🎵 Sound Effects</div><div class="settings-desc">Spin and win sounds</div></div>
+              <label class="toggle-switch"><input type="checkbox" id="soundSettingToggle" checked><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preset Wheels Section -->
+  <section class="section section-alt" id="preset-wheels" aria-label="Pre-designed wheels">
+    <div class="container">
+      <span class="section-label">⚡ Quick Launch</span>
+      <h2 class="section-title">Ready‑to‑Spin Presets</h2>
+      <p class="section-desc">Choose from popular categories and start spinning instantly. Or build your own custom wheel.</p>
+      <div class="presets-grid">
+        <button class="preset-btn" data-preset="food"><div class="preset-icon">🍕</div> Food Picker</button>
+        <button class="preset-btn" data-preset="yesno"><div class="preset-icon">🤔</div> Yes/No Oracle</button>
+        <button class="preset-btn" data-preset="numbers"><div class="preset-icon">🔢</div> Number Wheel</button>
+        <button class="preset-btn" data-preset="colors"><div class="preset-icon">🎨</div> Color Wheel</button>
+        <button class="preset-btn" data-preset="days"><div class="preset-icon">📅</div> Days of Week</button>
+        <button class="preset-btn" data-preset="truth"><div class="preset-icon">🎲</div> Truth or Dare</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wheel Types Section (Interactive Showcase) -->
+  <section id="wheel-types" class="section" aria-label="Different wheel types">
+    <div class="container">
+      <div class="section-label">🎡 Explore Variations</div>
+      <h2 class="section-title">Find the perfect wheel for your need</h2>
+      <div class="wheel-types-tabs">
+        <button class="wheel-type-tab active" data-type="random">Random Picker</button>
+        <button class="wheel-type-tab" data-type="yesno">Yes / No</button>
+        <button class="wheel-type-tab" data-type="number">Number Wheel</button>
+        <button class="wheel-type-tab" data-type="color">Color Wheel</button>
+        <button class="wheel-type-tab" data-type="custom">Custom Choices</button>
+      </div>
+      <div class="wheel-type-panels">
+        <div id="panel-random" class="wheel-type-panel active">
+          <div class="type-cards-grid">
+            <div class="type-card"><div class="type-card-icon">🎲</div><h3>Ultimate Random Picker</h3><p>Perfect for picking a winner, random name selector, or classroom activities.</p><a href="#wheel-app" class="type-card-link">Try now →</a></div>
+            <div class="type-card"><div class="type-card-icon">🏆</div><h3>Giveaway Spinner</h3><p>Select lucky winners for contests, raffles, or social media giveaways.</p><a href="#wheel-app" class="type-card-link">Spin giveaway →</a></div>
+            <div class="type-card"><div class="type-card-icon">👥</div><h3>Team Chooser</h3><p>Assign tasks, split teams, or randomly pick a leader.</p><a href="#wheel-app" class="type-card-link">Pick teams →</a></div>
+          </div>
+        </div>
+        <div id="panel-yesno" class="wheel-type-panel"><div class="type-cards-grid"><div class="type-card"><div class="type-card-icon">✅</div><h3>Yes / No Decision Wheel</h3><p>Let the wheel decide yes, no, maybe — answer dilemmas instantly.</p><a href="#wheel-app" class="type-card-link">Use Yes/No →</a></div></div></div>
+        <div id="panel-number" class="wheel-type-panel"><div class="type-cards-grid"><div class="type-card"><div class="type-card-icon">🔢</div><h3>Number Generator</h3><p>Spin to get random numbers between 1–10, 1–100, or custom ranges.</p><a href="#wheel-app" class="type-card-link">Number wheel →</a></div></div></div>
+        <div id="panel-color" class="wheel-type-panel"><div class="type-cards-grid"><div class="type-card"><div class="type-card-icon">🌈</div><h3>Color Picker Wheel</h3><p>Perfect for design inspiration, games, or random color selection.</p><a href="#wheel-app" class="type-card-link">Pick a color →</a></div></div></div>
+        <div id="panel-custom" class="wheel-type-panel"><div class="type-cards-grid"><div class="type-card"><div class="type-card-icon">✏️</div><h3>Fully Customizable</h3><p>Add your own labels, categories, names. Unlimited possibilities.</p><a href="#wheel-app" class="type-card-link">Build your wheel →</a></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="section section-alt" aria-label="Key features">
+    <div class="container">
+      <span class="section-label">✨ Why choose us</span>
+      <h2 class="section-title">Everything you need in a spin wheel</h2>
+      <div class="features-grid">
+        <div class="feature-card animate-on-scroll"><div class="feature-icon">🎨</div><h3>Custom Themes</h3><p>Classic, neon, pastel, dark mode — personalize your wheel experience.</p></div>
+        <div class="feature-card animate-on-scroll"><div class="feature-icon">📊</div><h3>Real Spin History</h3><p>Track all previous results and never lose your decisions.</p></div>
+        <div class="feature-card animate-on-scroll"><div class="feature-icon">🔊</div><h3>Satisfying Sounds</h3><p>Optional sound effects and winning fanfares.</p></div>
+        <div class="feature-card animate-on-scroll"><div class="feature-icon">📱</div><h3>Mobile Friendly</h3><p>Fully responsive — spin with a tap on any device.</p></div>
+        <div class="feature-card animate-on-scroll"><div class="feature-icon">📋</div><h3>Bulk Import</h3><p>Add dozens of entries at once via paste.</p></div>
+        <div class="feature-card animate-on-scroll"><div class="feature-icon">🔗</div><h3>Share Your Wheel</h3><p>Copy a unique link to share your custom wheel with friends.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="section" aria-label="How it works steps">
+    <div class="container">
+      <span class="section-label">🚀 3 Simple Steps</span>
+      <h2 class="section-title">Spin in seconds</h2>
+      <div class="how-grid">
+        <div class="how-step animate-on-scroll"><div class="step-num">1</div><h3>Customize your entries</h3><p>Add or edit options — from food to names, tasks, or numbers.</p></div>
+        <div class="how-step animate-on-scroll"><div class="step-num">2</div><h3>Pick a theme or preset</h3><p>Choose a style that fits your mood or use ready-to-spin presets.</p></div>
+        <div class="how-step animate-on-scroll"><div class="step-num">3</div><h3>Click spin & celebrate!</h3><p>Watch the wheel spin, land on a random choice, and see confetti.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section id="use-cases" class="section section-alt" aria-label="Popular use cases">
+    <div class="container">
+      <span class="section-label">💡 Everyone loves wheels</span>
+      <h2 class="section-title">Used by millions worldwide</h2>
+      <div class="use-cases-grid">
+        <div class="use-case-card"><div class="use-case-icon">🏫</div><h3>Classroom</h3><p>Pick students, random questions.</p></div>
+        <div class="use-case-card"><div class="use-case-icon">🎁</div><h3>Giveaways</h3><p>Select winners fairly.</p></div>
+        <div class="use-case-card"><div class="use-case-icon">🍕</div><h3>What to Eat</h3><p>Choose dinner or restaurant.</p></div>
+        <div class="use-case-card"><div class="use-case-icon">🎮</div><h3>Game Night</h3><p>Truth or dare, challenges.</p></div>
+        <div class="use-case-card"><div class="use-case-icon">🧠</div><h3>Brainstorming</h3><p>Random topic picker.</p></div>
+        <div class="use-case-card"><div class="use-case-icon">📝</div><h3>To-Do Lists</h3><p>Random task chooser.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO & Additional Content -->
+  <section class="section content-section" aria-label="About wheel generator">
+    <div class="container">
+      <div class="content-grid">
+        <div class="content-block animate-on-scroll">
+          <h3>Why WheelGenerator is the best free spin wheel tool</h3>
+          <p>Unlike other random pickers, WheelGenerator offers unlimited customization, multiple themes, sound effects, history tracking, and a smooth animation engine. No sign-up, completely free, and always works offline-ready once loaded. Perfect for teachers, streamers, content creators, and families.</p>
+          <div class="content-tags">
+            <span class="tag">free spin wheel</span><span class="tag">random name picker</span><span class="tag">decision maker</span><span class="tag">custom wheel</span>
+          </div>
+        </div>
+        <div class="content-block animate-on-scroll">
+          <h3>How to make a custom spin wheel?</h3>
+          <p>Simply type or paste your options in the "Entries" panel, add as many as you like, click the color theme you prefer, and press spin. You can also sort, shuffle, or bulk add dozens of items. The wheel auto-updates instantly. Use the share button to send your unique wheel to friends.</p>
+          <div class="content-tags">
+            <span class="tag">wheel generator</span><span class="tag">yes no wheel</span><span class="tag">number wheel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="section section-alt" aria-label="Frequently asked questions">
+    <div class="container">
+      <span class="section-label">❓ Need help?</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-question">Is the wheel truly random? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Yes! Our spin wheel uses physics-based random velocity and unbiased angle detection. Every spin is independent and fair.</p></div></div>
+        <div class="faq-item"><button class="faq-question">Can I use this on my phone? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Absolutely. The wheel is fully responsive, and you can spin by tapping the canvas or the spin button. Mobile touch supported.</p></div></div>
+        <div class="faq-item"><button class="faq-question">How many options can I add? <span class="faq-icon">+</span></button><div class="faq-answer"><p>You can add up to 100+ entries; performance remains smooth. For very long lists, the wheel adapts text sizing.</p></div></div>
+        <div class="faq-item"><button class="faq-question">Do I need to create an account? <span class="faq-icon">+</span></button><div class="faq-answer"><p>No registration required. Everything works right in your browser, and your wheel data stays private.</p></div></div>
+        <div class="faq-item"><button class="faq-question">Can I remove a result after spinning? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Yes! Enable "Remove entry after spin" in settings to delete the winner automatically — great for raffles or tournaments.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <div class="cta-banner">
+    <h2>Ready to let the wheel decide?</h2>
+    <p>Create your custom spin wheel now — it's free, fast, and fun.</p>
+    <a href="#wheel-app" class="btn-white">🎡 Create My Wheel</a>
+  </div>
+</main>
+
+<!-- Modals (Bulk import) -->
+<div id="bulkModal" class="modal-overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-header"><h3>📋 Bulk Add Entries</h3><button id="closeBulkModal" class="modal-close" aria-label="Close">✕</button></div>
+    <p class="modal-desc">Enter one option per line. Paste your list below:</p>
+    <textarea id="bulkInput" rows="6" placeholder="Pizza&#10;Tacos&#10;Ramen&#10;Sushi"></textarea>
+    <button id="bulkAddBtn" class="btn-primary" style="width:100%">Add All & Close</button>
+  </div>
+</div>
+
+  <div id="footer-root"></div>  
+
+  <script src="header.js"></script>
+  <script src="footer.js"></script>
+  <script src="app.js"></script>
+  <script src="wheel.js"></script>
+
+<!-- Scripts (module based) -->
+<script type="module" src="app.js"></script>
+<script>
+  // Small helper to sync global functions used inline contenteditable
+  window.updateEntry = null;
+  window.removeEntry = null;
+  document.addEventListener('DOMContentLoaded', () => {
+    // Additional handling for panel tabs inside wheel-panel
+    const tabs = document.querySelectorAll('.panel-tab');
+    const panels = {
+      entries: document.getElementById('panel-entries'),
+      themes: document.getElementById('panel-themes'),
+      history: document.getElementById('panel-history'),
+      settings: document.getElementById('panel-settings')
+    };
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.panel;
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        Object.values(panels).forEach(p => p?.classList.remove('active'));
+        if (target && panels[target]) panels[target].classList.add('active');
+      });
+    });
+    // Sync sound setting toggle in settings panel with main sound toggle
+    const soundSettingToggle = document.getElementById('soundSettingToggle');
+    const soundToolbarBtn = document.getElementById('soundToggle');
+    if (soundSettingToggle && soundToolbarBtn) {
+      soundSettingToggle.addEventListener('change', (e) => {
+        const isChecked = e.target.checked;
+        if (soundToolbarBtn) {
+          if (!isChecked) soundToolbarBtn.classList.add('muted');
+          else soundToolbarBtn.classList.remove('muted');
+          soundToolbarBtn.textContent = isChecked ? '🔊' : '🔇';
+          const wheelEvent = new CustomEvent('soundToggleGlobal', { detail: { enabled: isChecked } });
+          document.dispatchEvent(wheelEvent);
+        }
+      });
+      soundToolbarBtn.addEventListener('click', () => {
+        const currentlyMuted = soundToolbarBtn.classList.contains('muted');
+        soundSettingToggle.checked = currentlyMuted ? false : true;
+        soundSettingToggle.dispatchEvent(new Event('change'));
+      });
+    }
+    // Ensure fullscreen btn works
+    const fsBtn = document.getElementById('fullscreenBtn');
+    if (fsBtn) {
+      fsBtn.addEventListener('click', () => {
+        const wheelSection = document.getElementById('wheel-app');
+        if (!document.fullscreenElement) wheelSection?.requestFullscreen?.().catch(e=>{});
+        else document.exitFullscreen?.();
+      });
+    }
+  });
+</script>
+</body>
+</html>
