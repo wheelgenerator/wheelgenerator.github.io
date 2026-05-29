@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="description" content="Contact Rebecca Watson at WheelGenerator. Get in touch for feature suggestions, custom utility workspace implementations, tool inquiries, or developer collaborations.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://wheelgenerator.github.io/contact">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <title>Contact Us — WheelGenerator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="style (16).css">
+  <style>
+    .contact-container {
+      max-width: 960px;
+      margin: calc(var(--nav-h) + 60px) auto 80px;
+      padding: 0 24px;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+      align-items: start;
+      margin-top: 40px;
+    }
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+    .contact-info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+    .contact-info-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    .contact-method {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .contact-icon-wrapper {
+      font-size: 1.5rem;
+      background: rgba(255,107,53,0.1);
+      color: var(--primary);
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-method-details h4 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+    .contact-method-details p, .contact-method-details a {
+      font-size: 0.95rem;
+      color: var(--text2);
+    }
+    .contact-method-details a:hover {
+      color: var(--primary);
+    }
+    .contact-form-pane {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: var(--shadow);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text2);
+      margin-bottom: 8px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      background: var(--bg);
+      transition: border-color .2s;
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+      background: var(--surface);
+    }
+    textarea.form-control {
+      resize: vertical;
+      min-height: 140px;
+    }
+    .submit-button {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      padding: 14px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 1rem;
+      box-shadow: 0 4px 14px rgba(255,107,53,0.3);
+      transition: background .2s, transform .15s;
+    }
+    .submit-button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+
+<div id="header-root"></div>
+
+<main class="contact-container">
+  <div style="text-align: center;">
+    <span class="section-label">Connect Workspace</span>
+    <h1 class="section-title">Get in Touch</h1>
+    <p class="section-desc" style="margin: 0 auto;">Have feature suggestions, structural integration ideas, search discovery inquiries, or technical design requests? Drop a line below.</p>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-info-card">
+      <h2 class="contact-info-title">Contact Information</h2>
+      <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6;">Feel free to drop a direct query message across our processing networks. As a dedicated web tool creator, I regularly monitor structural feedback loops to keep tool functionality robust.</p>
+      
+      <div class="contact-method">
+        <div class="contact-icon-wrapper">✉️</div>
+        <div class="contact-method-details">
+          <h4>Direct Inquiry Email</h4>
+          <p><a href="mailto:rebeccanobelgirl@gmail.com">rebeccanobelgirl@gmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="contact-method">
+        <div class="contact-icon-wrapper">💻</div>
+        <div class="contact-method-details">
+          <h4>Interactive Projects</h4>
+          <p><a href="index (98).html">wheelgenerator.github.io</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-pane">
+      <form action="https://formspree.io/f/xoqgkeep" method="POST" onsubmit="alert('Thank you for your message! We will get back to you soon.');">
+        <div class="form-group">
+          <label for="contact-name">Full Name</label>
+          <input type="text" id="contact-name" name="name" class="form-control" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Email Address</label>
+          <input type="email" id="contact-email" name="email" class="form-control" placeholder="yourname@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-subject">Inquiry Subject</label>
+          <input type="text" id="contact-subject" name="subject" class="form-control" placeholder="e.g., Feature Request / Collaboration" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-message">Detailed Message</label>
+          <textarea id="contact-message" name="message" class="form-control" placeholder="Type your message description here..." required></textarea>
+        </div>
+        <button type="submit" class="submit-button">✉️ Send Message</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<div id="footer-root"></div>
+
+<script src="header.js"></script>
+<script src="footer.js"></script>
+</body>
+</html>
