@@ -589,3 +589,26 @@ ul { list-style: none; }
   .footer-links { grid-template-columns: 1fr; }
   #wheel-app { padding: 48px 16px; }
 }
+/* Ensure the icon container controls the size */
+.preset-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;  /* Adjust width as needed */
+  height: 24px; /* Adjust height as needed */
+  vertical-align: middle;
+}
+
+/* Make the image fill the container perfectly */
+.preset-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Keeps the aspect ratio intact */
+}
+
+/* Optional: If your layout needs a little space between the image and text */
+.preset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; 
+}
