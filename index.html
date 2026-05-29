@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VBZ3RM362W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VBZ3RM362W');
+</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <meta name="description" content="WheelGenerator — Free interactive spin wheel to make random decisions, pick names, yes/no, numbers, colors, and custom choices. Fun, customizable, and easy to use.">
@@ -24,6 +33,72 @@
   <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://wheelgenerator.github.io/#website",
+      "url": "https://wheelgenerator.github.io/",
+      "name": "WheelGenerator",
+      "description": "Free interactive spin wheel to make random decisions, pick names, yes/no, numbers, colors, and custom choices. Fun, customizable, and easy to use.",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wheelgenerator.github.io/#faq",
+      "isPartOf": {
+        "@id": "https://wheelgenerator.github.io/#website"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is the wheel truly random?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Our spin wheel uses physics-based random velocity and unbiased angle detection. Every spin is independent and fair."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this on my phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. The wheel is fully responsive, and you can spin by tapping the canvas or the spin button. Mobile touch supported."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many options can I add?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can add up to 100+ entries; performance remains smooth. For very long lists, the wheel adapts text sizing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to create an account?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No registration required. Everything works right in your browser, and your wheel data stays private."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I remove a result after spinning?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Enable \"Remove entry after spin\" in settings to delete the winner automatically — great for raffles or tournaments."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+  
 
 <!-- Header, navbar, footer will be injected by JS components -->
 <div id="header-root"></div>
