@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://wheelgenerator.github.io/sitemap.xml
