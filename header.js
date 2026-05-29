@@ -13,22 +13,22 @@ const HeaderComponent = {
             <span></span><span></span><span></span>
           </button>
           <ul class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
-            <li><a href="#wheel-app" class="nav-link">Spin Wheel</a></li>
+            <li><a href="/#wheel-app" class="nav-link">Spin Wheel</a></li>
             <li class="has-dropdown">
-              <a href="#wheel-types" class="nav-link">Wheel Types <span class="arrow">▾</span></a>
+              <a href="/#wheel-types" class="nav-link">Wheel Types <span class="arrow">▾</span></a>
               <ul class="dropdown">
-                <li><a href="#wheel-types">Random Picker</a></li>
-                <li><a href="#wheel-types">Yes/No Wheel</a></li>
-                <li><a href="#wheel-types">Number Wheel</a></li>
-                <li><a href="#wheel-types">Color Wheel</a></li>
-                <li><a href="#wheel-types">Custom Wheel</a></li>
+                <li><a href="/#wheel-types">Random Picker</a></li>
+                <li><a href="/#wheel-types">Yes/No Wheel</a></li>
+                <li><a href="/#wheel-types">Number Wheel</a></li>
+                <li><a href="/#wheel-types">Color Wheel</a></li>
+                <li><a href="/#wheel-types">Custom Wheel</a></li>
               </ul>
             </li>
-            <li><a href="#features" class="nav-link">Features</a></li>
-            <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
-            <li><a href="#faq" class="nav-link">FAQ</a></li>
+            <li><a href="/#features" class="nav-link">Features</a></li>
+            <li><a href="/#how-it-works" class="nav-link">How It Works</a></li>
+            <li><a href="/#faq" class="nav-link">FAQ</a></li>
           </ul>
-          <a href="#wheel-app" class="cta-btn">Spin Now</a>
+          <a href="/#wheel-app" class="cta-btn">Spin Now</a>
         </div>
       </nav>
     `;
