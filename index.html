@@ -37,63 +37,60 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@graph": [
+  "@type": "WebSite",
+  "@id": "https://wheelgenerator.github.io/#website",
+  "url": "https://wheelgenerator.github.io/",
+  "name": "WheelGenerator",
+  "description": "Free interactive spin wheel to make random decisions, pick names, yes/no, numbers, colors, and custom choices. Fun, customizable, and easy to use.",
+  "inLanguage": "en"
+}
+</script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://wheelgenerator.github.io/#faq",
+  "mainEntity": [
     {
-      "@type": "WebSite",
-      "@id": "https://wheelgenerator.github.io/#website",
-      "url": "https://wheelgenerator.github.io/",
-      "name": "WheelGenerator",
-      "description": "Free interactive spin wheel to make random decisions, pick names, yes/no, numbers, colors, and custom choices. Fun, customizable, and easy to use.",
-      "inLanguage": "en"
+      "@type": "Question",
+      "name": "Is the wheel truly random?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Our spin wheel uses physics-based random velocity and unbiased angle detection. Every spin is independent and fair."
+      }
     },
     {
-      "@type": "FAQPage",
-      "@id": "https://wheelgenerator.github.io/#faq",
-      "isPartOf": {
-        "@id": "https://wheelgenerator.github.io/#website"
-      },
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Is the wheel truly random?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! Our spin wheel uses physics-based random velocity and unbiased angle detection. Every spin is independent and fair."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I use this on my phone?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Absolutely. The wheel is fully responsive, and you can spin by tapping the canvas or the spin button. Mobile touch supported."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How many options can I add?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "You can add up to 100+ entries; performance remains smooth. For very long lists, the wheel adapts text sizing."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do I need to create an account?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No registration required. Everything works right in your browser, and your wheel data stays private."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I remove a result after spinning?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! Enable \"Remove entry after spin\" in settings to delete the winner automatically — great for raffles or tournaments."
-          }
-        }
-      ]
+      "@type": "Question",
+      "name": "Can I use this on my phone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. The wheel is fully responsive, and you can spin by tapping the canvas or the spin button. Mobile touch supported."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many options can I add?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can add up to 100+ entries; performance remains smooth. For very long lists, the wheel adapts text sizing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to create an account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No registration required. Everything works right in your browser, and your wheel data stays private."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I remove a result after spinning?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Enable \"Remove entry after spin\" in settings to delete the winner automatically — great for raffles or tournaments."
+      }
     }
   ]
 }
