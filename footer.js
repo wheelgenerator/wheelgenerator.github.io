@@ -11,9 +11,7 @@ const FooterComponent = {
           </a>
           <p class="footer-tagline">Make every decision fun with a spin! The best free spin wheel random picker tool online.</p>
           <div class="footer-social">
-            <a href="#" aria-label="Twitter" class="social-link">𝕏</a>
-            <a href="#" aria-label="Facebook" class="social-link">f</a>
-            <a href="#" aria-label="YouTube" class="social-link">▶</a>
+            
           </div>
         </div>
         <div class="footer-links">
