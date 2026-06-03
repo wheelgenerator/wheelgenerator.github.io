@@ -7,7 +7,7 @@ const HeaderComponent = {
         <div class="nav-container">
           <a href="/" class="logo" aria-label="WheelGenerator Home">
             <span class="logo-icon">🎡</span>
-            <span class="logo-text">Wheel Spinner</span>
+            <span class="logo-text">Spin The Wheel</span>
           </a>
           <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
             <span></span><span></span><span></span>
