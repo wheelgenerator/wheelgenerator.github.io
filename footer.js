@@ -7,7 +7,7 @@ const FooterComponent = {
         <div class="footer-brand">
           <a href="/" class="footer-logo" aria-label="Spin ">
             <span class="logo-icon">🎡</span>
-            <span>Wheel Spinner</span>
+            <span>Spin The Wheel</span>
           </a>
           <p class="footer-tagline">Make every decision fun with a spin! The best free spin wheel random picker tool online.</p>
           <div class="footer-social">
