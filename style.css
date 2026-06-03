@@ -621,3 +621,9 @@ ul { list-style: none; }
   gap: 12px;              /* Space between the icon and the text */
   min-height: 100px;      /* Optional: Ensures all boxes are the same uniform height */
 }
+/* Make the canvas responsive */
+.wheel-canvas-wrap canvas {
+  width: 100%;
+  max-width: 500px;
+  height: auto; /* Keeps the perfect aspect ratio */
+}
