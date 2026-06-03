@@ -627,3 +627,29 @@ ul { list-style: none; }
   max-width: 500px;
   height: auto; /* Keeps the perfect aspect ratio */
 }
+@media (max-width: 700px) {
+  /* ... your existing rules ... */
+
+  /* Fix the container to handle layout naturally */
+  .nav-links.open {
+    overflow-y: auto; /* Keeps your main list scrollable if it's long */
+  }
+
+  /* Override desktop absolute positioning on mobile */
+  .has-dropdown:hover .dropdown {
+    position: relative; /* Push content down natively instead of floating over it */
+    top: 0;
+    left: 0;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    border-left: 2px solid var(--primary); /* Nice visual nesting indicator */
+    border-radius: 0;
+    min-width: 100%;
+    background: transparent;
+    padding-left: 12px;
+    margin-top: 4px;
+  }
+}
