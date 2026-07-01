@@ -136,8 +136,10 @@
 </script>
 </head>
 <body>
-<script src="/js/header.js"></script>
-<script>renderHeader('decision-maker');</script>
+
+  
+<!-- Header, navbar, footer will be injected by JS components -->
+<div id="header-root"></div>
 
 <!-- Hero -->
 <section class="pg-hero">
@@ -316,8 +318,11 @@
   </div>
 </section>
 
-<script src="/js/footer.js"></script>
-<script>renderFooter();</script>
+<div id="footer-root"></div>  
+
+  <script src="header.js"></script>
+  <script src="footer.js"></script>
+  
 <script>
 (function(){
   // Presets
