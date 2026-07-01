@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Decision Maker — Free Online Decision Making Tool | WheelGenerator</title>
+<meta name="description" content="Can't decide? Use our free Decision Maker tool to make random choices instantly. Add your options, spin, and let fate decide for you. No signup needed."/>
+<meta name="keywords" content="decision maker, random decision maker, make a decision, decision making tool, choose for me, random choice maker, yes or no decision"/>
+<link rel="canonical" href="https://wheelgenerator.github.io/decision-maker"/>
+<meta property="og:title" content="Free Decision Maker Tool — Let Fate Decide"/>
+<meta property="og:description" content="Can't choose? Add your options and our Decision Maker will pick for you instantly. Free, fast, fun."/>
+<meta property="og:url" content="https://wheelgenerator.github.io/decision-maker"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="stylesheet" href="/css/shared.css"/>
+<style>
+/* ── Page-specific ── */
+.dm-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.dm-col-title { font-family: var(--f-disp); font-size: .9rem; font-weight: 700; color: var(--txt2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .05em; }
+
+/* Options list */
+.dm-options { display: flex; flex-direction: column; gap: 10px; }
+.dm-option {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg); border: 1.5px solid var(--bdr); border-radius: var(--r-sm);
+  padding: 10px 12px; transition: border-color .2s;
+}
+.dm-option:focus-within { border-color: var(--pri); }
+.dm-option-num {
+  width: 26px; height: 26px; border-radius: 50%; background: var(--pri); color: #fff;
+  font-size: .75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.dm-option input {
+  flex: 1; border: none; background: none; font-family: var(--f-body); font-size: .95rem; outline: none; color: var(--txt);
+}
+.dm-option input::placeholder { color: var(--txt3); }
+.dm-option-del { color: var(--txt3); font-size: .9rem; padding: 4px 6px; border-radius: 6px; transition: all .15s; }
+.dm-option-del:hover { background: #fee; color: #e74c3c; }
+
+.dm-add-row { display: flex; gap: 8px; margin-top: 10px; }
+.dm-input {
+  flex: 1; padding: 10px 14px; border: 1.5px solid var(--bdr); border-radius: var(--r-sm);
+  font-family: var(--f-body); font-size: .9rem; outline: none; transition: border-color .2s; background: var(--bg);
+}
+.dm-input:focus { border-color: var(--pri); }
+.dm-add-btn { background: var(--pri); color: #fff; padding: 10px 18px; border-radius: var(--r-sm); font-weight: 800; font-size: .9rem; transition: background .2s; }
+.dm-add-btn:hover { background: var(--pri-dk); }
+
+.dm-presets { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+.dm-preset { background: var(--bg2); color: var(--txt2); border: 1.5px solid var(--bdr); padding: 5px 12px; border-radius: 50px; font-size: .78rem; font-weight: 700; transition: all .15s; }
+.dm-preset:hover { border-color: var(--pri); color: var(--pri); background: var(--pri-lt); }
+
+/* Result panel */
+.dm-result-wrap {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 340px; border-radius: 20px;
+  background: linear-gradient(135deg, #FFF8F5, #F0F4FF);
+  border: 2px dashed var(--bdr); padding: 32px; text-align: center;
+  position: relative; overflow: hidden; transition: border-color .3s;
+}
+.dm-result-wrap.decided { border-style: solid; border-color: var(--pri); background: linear-gradient(135deg, #FFF4F0, #FFF8F5); }
+.dm-idle-icon { font-size: 4rem; margin-bottom: 14px; opacity: .35; }
+.dm-idle-text { font-size: 1rem; color: var(--txt3); }
+.dm-decision-label { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--pri); margin-bottom: 10px; }
+.dm-decision-text {
+  font-family: var(--f-disp); font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700;
+  color: var(--txt); line-height: 1.2; word-break: break-word;
+}
+.dm-decision-sub { font-size: .875rem; color: var(--txt3); margin-top: 10px; }
+.dm-confetti-ring {
+  position: absolute; inset: 0; pointer-events: none;
+  border-radius: 20px; opacity: 0; transition: opacity .3s;
+}
+.dm-result-wrap.decided .dm-confetti-ring { opacity: 1; }
+
+/* Mode tabs */
+.dm-mode-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+.dm-mode-tab {
+  flex: 1; padding: 10px; border: 2px solid var(--bdr); border-radius: var(--r-sm);
+  font-weight: 700; font-size: .85rem; color: var(--txt2); text-align: center; transition: all .2s;
+}
+.dm-mode-tab.active { border-color: var(--pri); background: var(--pri-lt); color: var(--pri); }
+.dm-mode-tab:hover { border-color: var(--pri); color: var(--pri); }
+
+/* Spinner animation */
+@keyframes spinSlot {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-1400%); }
+}
+.dm-spinning .dm-decision-text { animation: pulse .15s infinite alternate; }
+@keyframes pulse { from { opacity: .6; } to { opacity: 1; } }
+
+/* History */
+.dm-history { margin-top: 16px; }
+.dm-hist-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0; border-bottom: 1px solid var(--bg2); font-size: .875rem;
+}
+.dm-hist-badge {
+  background: var(--pri-lt); color: var(--pri);
+  padding: 3px 10px; border-radius: 50px; font-size: .75rem; font-weight: 800; white-space: nowrap;
+}
+.dm-hist-time { font-size: .75rem; color: var(--txt3); margin-left: auto; }
+
+@media(max-width:700px) { .dm-layout { grid-template-columns: 1fr; } }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Decision Maker",
+  "url": "https://wheelgenerator.github.io/decision-maker",
+  "description": "Free online Decision Maker tool — add your options and let the app choose randomly for you. Perfect for any indecision.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["Random Decision Maker","Yes No Decision","Multiple Options Picker","Decision History","Preset Templates"],
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "WheelGenerator", "item": "https://wheelgenerator.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Decision Maker", "item": "https://wheelgenerator.github.io/decision-maker" }
+    ]
+  }
+}
+</script>
+</head>
+<body>
+<script src="/js/header.js"></script>
+<script>renderHeader('decision-maker');</script>
+
+<!-- Hero -->
+<section class="pg-hero">
+  <div class="pg-hero-inner">
+    <div class="pg-badge">🎯 Free Tool</div>
+    <h1>The Ultimate <span>Decision Maker</span></h1>
+    <p>Add your options and let our random decision maker choose for you instantly. Stop overthinking — let fate decide!</p>
+  </div>
+</section>
+
+<!-- App -->
+<div class="wrap" style="padding:0 20px;">
+<div class="app-card">
+  <div class="app-card-body">
+
+    <!-- Mode tabs -->
+    <div class="dm-mode-tabs" id="modeTabs">
+      <button class="dm-mode-tab active" data-mode="multi">📋 Multiple Options</button>
+      <button class="dm-mode-tab" data-mode="yesno">✅ Yes or No</button>
+      <button class="dm-mode-tab" data-mode="custom">⚡ Quick Decide</button>
+    </div>
+
+    <div class="dm-layout">
+      <!-- Left: options -->
+      <div id="optionsPanel">
+        <div class="dm-col-title">Your Options <span id="optCount" style="background:var(--pri);color:#fff;padding:2px 8px;border-radius:50px;font-size:.72rem;margin-left:6px;">3</span></div>
+        <div class="dm-options" id="optionsList"></div>
+        <div class="dm-add-row" id="addRow">
+          <input class="dm-input" id="newOptionInput" placeholder="Add an option…" maxlength="60"/>
+          <button class="dm-add-btn" id="addOptionBtn">+ Add</button>
+        </div>
+        <div style="margin-top:12px;">
+          <div class="dm-col-title" style="margin-bottom:8px;">Quick Presets</div>
+          <div class="dm-presets" id="presetsRow">
+            <button class="dm-preset" data-preset="yesno">Yes / No</button>
+            <button class="dm-preset" data-preset="food">Food 🍕</button>
+            <button class="dm-preset" data-preset="movies">Movies 🎬</button>
+            <button class="dm-preset" data-preset="weekend">Weekend 🌤</button>
+            <button class="dm-preset" data-preset="travel">Travel ✈</button>
+          </div>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn btn-ghost btn-sm" id="shuffleBtn">🔀 Shuffle</button>
+          <button class="btn btn-ghost btn-sm" id="clearBtn">🗑 Clear All</button>
+        </div>
+      </div>
+
+      <!-- Right: result -->
+      <div>
+        <div class="dm-col-title">Decision</div>
+        <div class="dm-result-wrap" id="resultWrap">
+          <div class="dm-idle-icon" id="idleIcon">🤔</div>
+          <div class="dm-idle-text" id="idleText">Add options and click Decide!</div>
+          <div class="dm-decision-label" id="decisionLabel" style="display:none;">The Decision Is…</div>
+          <div class="dm-decision-text" id="decisionText" style="display:none;"></div>
+          <div class="dm-decision-sub" id="decisionSub" style="display:none;"></div>
+        </div>
+        <button class="btn btn-primary" id="decideBtn" style="width:100%;margin-top:16px;font-size:1.1rem;">🎯 Decide for Me!</button>
+        <button class="btn btn-ghost btn-sm" id="decideAgainBtn" style="width:100%;margin-top:8px;display:none;">↩ Decide Again</button>
+
+        <div class="dm-history" id="historyPanel">
+          <div class="dm-col-title" style="margin-top:20px;">Decision History</div>
+          <div id="historyList"><p style="font-size:.85rem;color:var(--txt3);">No decisions yet.</p></div>
+          <button class="btn btn-ghost btn-sm" id="clearHistBtn" style="margin-top:8px;display:none;">Clear History</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- Features -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-label">Why Use It</div>
+    <h2 class="sec-title">Smart Decision Making Features</h2>
+    <p class="sec-desc">Our free decision maker takes the stress out of choices — big or small.</p>
+    <div class="info-grid">
+      <div class="info-card animate-on-scroll">
+        <div class="info-card-icon">⚡</div>
+        <h3>Instant Results</h3>
+        <p>Get a random decision in milliseconds. No loading, no delays — just a fast, fair choice.</p>
+      </div>
+      <div class="info-card animate-on-scroll">
+        <div class="info-card-icon">🎲</div>
+        <h3>Truly Random</h3>
+        <p>Uses cryptographic randomness to ensure every option has an equal chance of being chosen.</p>
+      </div>
+      <div class="info-card animate-on-scroll">
+        <div class="info-card-icon">📋</div>
+        <h3>Multiple Options</h3>
+        <p>Add as many choices as you need. Perfect for group decisions with lots of possibilities.</p>
+      </div>
+      <div class="info-card animate-on-scroll">
+        <div class="info-card-icon">📜</div>
+        <h3>Decision History</h3>
+        <p>View all your past decisions in one place. Useful for tracking patterns and results.</p>
+      </div>
+      <div class="info-card animate-on-scroll">
+        <div class="info-card-icon">📱</div>
+        <h3>Mobile Friendly</h3>
+        <p>Works perfectly on any device. Make decisions on the go with your phone or tablet.</p>
+      </div>
+      <div class="info-card animate-on-scroll">
+        <div class="info-card-icon">🆓</div>
+        <h3>100% Free</h3>
+        <p>No accounts, no subscriptions, no limits. Our decision maker is always free to use.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Use Cases -->
+<section class="section section-alt">
+  <div class="wrap-sm">
+    <div class="sec-label">Use Cases</div>
+    <h2 class="sec-title">When to Use a Decision Maker</h2>
+    <p class="sec-desc">From everyday choices to life decisions — our tool helps whenever you're stuck.</p>
+    <div class="info-grid" style="margin-top:28px;">
+      <div class="info-card animate-on-scroll"><div class="info-card-icon">🍕</div><h3>What to Eat</h3><p>End the "what's for dinner?" debate forever with a fair random pick.</p></div>
+      <div class="info-card animate-on-scroll"><div class="info-card-icon">🎬</div><h3>Movie Night</h3><p>Choose from your watchlist without arguing. Just add films and decide!</p></div>
+      <div class="info-card animate-on-scroll"><div class="info-card-icon">✈️</div><h3>Travel Plans</h3><p>Pick your next travel destination randomly for a spontaneous adventure.</p></div>
+      <div class="info-card animate-on-scroll"><div class="info-card-icon">🎮</div><h3>Game Selection</h3><p>Can't agree on which game to play? Let the decision maker choose.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEO Content -->
+<section class="section">
+  <div class="wrap-sm">
+    <div class="sec-label">About This Tool</div>
+    <h2 class="sec-title">Random Decision Maker — Make Choices Effortlessly</h2>
+    <p style="color:var(--txt2);margin-bottom:16px;">Decision fatigue is real. Whether you're choosing what to eat, where to travel, or which job offer to accept, making decisions takes mental energy. Our <strong>free decision maker online</strong> removes that burden by introducing an element of randomness and fun into the process.</p>
+    <p style="color:var(--txt2);margin-bottom:16px;">Simply enter your options into the decision picker, hit the big Decide button, and our tool will randomly select one for you. It uses JavaScript's <code>crypto.getRandomValues()</code> API for genuine randomness — not a fake random number that favors certain options.</p>
+    <p style="color:var(--txt2);margin-bottom:24px;">Perfect as a <strong>yes or no decision maker</strong>, a <strong>random choice maker</strong> for group activities, or just to stop overthinking your next meal. Give it a try — your decision is just one click away.</p>
+    <div class="tag-cloud">
+      <span class="tag">decision maker online</span>
+      <span class="tag">random decision maker</span>
+      <span class="tag">choose for me</span>
+      <span class="tag">yes or no decision</span>
+      <span class="tag">random choice maker</span>
+      <span class="tag">make a decision tool</span>
+      <span class="tag">decision making tool free</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-alt">
+  <div class="wrap-sm">
+    <div class="sec-label">FAQ</div>
+    <h2 class="sec-title">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-q">Is the decision maker truly random? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Yes! We use the Web Crypto API (<code>crypto.getRandomValues()</code>) which provides cryptographically secure random numbers — far more random than typical <code>Math.random()</code> calls. Every option has an equal probability of being selected.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How many options can I add? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>There's no hard limit! You can add as many options as you like. The decision maker works great whether you have 2 options or 50.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I use this for Yes or No decisions? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Absolutely. Switch to "Yes or No" mode using the tab at the top, and the tool will randomly pick Yes or No (with some fun extras like Maybe). Or just add "Yes" and "No" as your two options.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is this decision maker free? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>100% free with no signup required. Use it as many times as you like on any device.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I share my decision with others? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Currently the history is stored in your browser session. You can screenshot or copy the result to share it. A shareable link feature is coming soon!</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/js/footer.js"></script>
+<script>renderFooter();</script>
+<script>
+(function(){
+  // Presets
+  const PRESETS = {
+    yesno:   ['Yes','No','Maybe','Absolutely!','No Way','Ask Again Later'],
+    food:    ['Pizza','Sushi','Tacos','Burger','Ramen','Salad','Pasta','BBQ'],
+    movies:  ['Action','Comedy','Horror','Thriller','Romance','Sci-Fi','Documentary','Animation'],
+    weekend: ['Stay Home','Go Hiking','Visit a Friend','Road Trip','Museum','Movie Night','Try a New Restaurant','Nothing — relax!'],
+    travel:  ['Paris','Tokyo','New York','Bali','Barcelona','Dubai','Sydney','Cape Town'],
+  };
+
+  let options = ['Go to the gym', 'Take a rest day', 'Go for a walk'];
+  let history = [];
+  let currentMode = 'multi';
+
+  const listEl       = document.getElementById('optionsList');
+  const optCountEl   = document.getElementById('optCount');
+  const newInput     = document.getElementById('newOptionInput');
+  const addBtn       = document.getElementById('addOptionBtn');
+  const decideBtn    = document.getElementById('decideBtn');
+  const againBtn     = document.getElementById('decideAgainBtn');
+  const resultWrap   = document.getElementById('resultWrap');
+  const idleIcon     = document.getElementById('idleIcon');
+  const idleText     = document.getElementById('idleText');
+  const labelEl      = document.getElementById('decisionLabel');
+  const textEl       = document.getElementById('decisionText');
+  const subEl        = document.getElementById('decisionSub');
+  const historyList  = document.getElementById('historyList');
+  const clearHistBtn = document.getElementById('clearHistBtn');
+
+  function secureRandom(n) {
+    const arr = new Uint32Array(1);
+    crypto.getRandomValues(arr);
+    return arr[0] % n;
+  }
+
+  function renderOptions() {
+    const pool = currentMode === 'yesno'
+      ? ['Yes','No','Maybe','Definitely!','No Way','Ask Again']
+      : options;
+    listEl.innerHTML = pool.map((o, i) => `
+      <div class="dm-option">
+        <div class="dm-option-num">${i+1}</div>
+        <input value="${escHtml(o)}" onchange="updateOption(${i},this.value)" ${currentMode==='yesno'?'readonly':''}/>
+        ${currentMode!=='yesno'?`<button class="dm-option-del" onclick="removeOption(${i})">✕</button>`:''}
+      </div>`).join('');
+    optCountEl.textContent = pool.length;
+    document.getElementById('addRow').style.display = currentMode==='yesno'?'none':'flex';
+    document.getElementById('presetsRow').style.display = currentMode==='yesno'?'none':'flex';
+  }
+
+  function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  window.updateOption = (i, v) => { options[i] = v; };
+  window.removeOption = (i) => { options.splice(i,1); renderOptions(); resetResult(); };
+
+  addBtn.addEventListener('click', () => {
+    const v = newInput.value.trim();
+    if(v){ options.push(v); newInput.value=''; renderOptions(); resetResult(); }
+  });
+  newInput.addEventListener('keydown', e => { if(e.key==='Enter') addBtn.click(); });
+
+  document.getElementById('shuffleBtn').addEventListener('click', () => {
+    for(let i=options.length-1;i>0;i--){ const j=secureRandom(i+1); [options[i],options[j]]=[options[j],options[i]]; }
+    renderOptions();
+  });
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    if(confirm('Clear all options?')){ options=[]; renderOptions(); resetResult(); }
+  });
+
+  document.getElementById('modeTabs').addEventListener('click', e => {
+    const tab = e.target.closest('.dm-mode-tab');
+    if(!tab) return;
+    document.querySelectorAll('.dm-mode-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    currentMode = tab.dataset.mode;
+    if(currentMode==='yesno') options=['Yes','No','Maybe','Definitely!','No Way','Ask Again'];
+    if(currentMode==='custom') options=['Option A','Option B','Option C'];
+    renderOptions(); resetResult();
+  });
+
+  document.getElementById('presetsRow').addEventListener('click', e => {
+    const btn = e.target.closest('.dm-preset');
+    if(!btn) return;
+    options = [...PRESETS[btn.dataset.preset]];
+    renderOptions(); resetResult();
+  });
+
+  function resetResult(){
+    resultWrap.classList.remove('decided','dm-spinning');
+    idleIcon.style.display=''; idleText.style.display='';
+    labelEl.style.display='none'; textEl.style.display='none'; subEl.style.display='none';
+    againBtn.style.display='none';
+  }
+
+  function decide(){
+    const pool = currentMode==='yesno'
+      ? ['Yes','No','Maybe','Definitely!','No Way','Ask Again']
+      : options.filter(o=>o.trim());
+    if(!pool.length){ alert('Please add at least one option!'); return; }
+
+    idleIcon.style.display='none'; idleText.style.display='none';
+    labelEl.style.display='block'; textEl.style.display='block'; subEl.style.display='block';
+    resultWrap.classList.remove('decided'); resultWrap.classList.add('dm-spinning');
+
+    let ticks = 0; const totalTicks = 14 + Math.floor(Math.random()*10);
+    const iv = setInterval(()=>{
+      textEl.textContent = pool[secureRandom(pool.length)];
+      ticks++;
+      if(ticks>=totalTicks){
+        clearInterval(iv);
+        const winner = pool[secureRandom(pool.length)];
+        textEl.textContent = winner;
+        subEl.textContent = `Chosen from ${pool.length} option${pool.length!==1?'s':''}`;
+        resultWrap.classList.remove('dm-spinning'); resultWrap.classList.add('decided');
+        againBtn.style.display='block';
+        addHistory(winner);
+        playWin();
+      }
+    }, 80);
+  }
+
+  decideBtn.addEventListener('click', decide);
+  againBtn.addEventListener('click', decide);
+
+  function addHistory(text){
+    history.unshift({text, time: new Date().toLocaleTimeString()});
+    if(history.length>15) history.pop();
+    renderHistory();
+  }
+  function renderHistory(){
+    if(!history.length){ historyList.innerHTML='<p style="font-size:.85rem;color:var(--txt3);">No decisions yet.</p>'; clearHistBtn.style.display='none'; return; }
+    historyList.innerHTML = history.map((h,i)=>`
+      <div class="dm-hist-item">
+        <span class="dm-hist-badge">${h.text}</span>
+        <span class="dm-hist-time">${h.time}</span>
+      </div>`).join('');
+    clearHistBtn.style.display='block';
+  }
+  clearHistBtn.addEventListener('click', ()=>{ history=[]; renderHistory(); });
+
+  function playWin(){
+    try{
+      const ac=new(window.AudioContext||window.webkitAudioContext)();
+      [392,523,659,784].forEach((f,i)=>{
+        const o=ac.createOscillator(),g=ac.createGain();
+        o.connect(g);g.connect(ac.destination);
+        o.frequency.value=f;o.type='sine';
+        const t=ac.currentTime+i*.1;
+        g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.001,t+.35);
+        o.start(t);o.stop(t+.35);
+      });
+    }catch(e){}
+  }
+
+  // FAQ
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const item=btn.closest('.faq-item');
+      const isOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Animate on scroll
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }),{threshold:.1});
+  document.querySelectorAll('.animate-on-scroll').forEach(el=>obs.observe(el));
+
+  renderOptions();
+})();
+</script>
+</body>
+</html>
