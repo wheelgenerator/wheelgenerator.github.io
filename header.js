@@ -1,4 +1,4 @@
-const HeaderComponent = {
+const HeaderComponent = { 
   render() {
     const header = document.createElement('header');
     header.className = 'site-header';
