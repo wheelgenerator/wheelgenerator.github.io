@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dice Roller — Free Online Dice Rolling Simulator | WheelGenerator</title>
+<meta name="description" content="Roll any dice online free — D4, D6, D8, D10, D12, D20, D100 and custom dice. Perfect for D&D, tabletop RPGs, board games and more. Beautiful 3D dice animation, roll history, and sum totals."/>
+<meta name="keywords" content="dice roller, roll dice online, D&D dice roller, dice simulator, virtual dice, D20 roller, D6 dice, tabletop dice, random dice roller, online dice"/>
+<link rel="canonical" href="https://wheelgenerator.github.io/dice-roller.html"/>
+<meta property="og:title" content="Free Online Dice Roller — Roll Any Dice Instantly"/>
+<meta property="og:description" content="Roll D4, D6, D8, D10, D12, D20, D100 and custom dice online. Perfect for D&D, board games and more. Free, no signup."/>
+<meta property="og:url" content="https://wheelgenerator.github.io/dice-roller.html"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Dice Roller",
+      "url": "https://wheelgenerator.github.io/dice-roller.html",
+      "description": "Free online dice roller. Roll D4, D6, D8, D10, D12, D20, D100 and custom dice. Includes 3D animation, roll history, sum totals, and D&D presets.",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "featureList": ["D4 D6 D8 D10 D12 D20 D100","Custom Dice Sides","Multiple Dice","Roll History","Sum Totals","D&D Presets","Shake to Roll"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "WheelGenerator", "item": "https://wheelgenerator.github.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Dice Roller", "item": "https://wheelgenerator.github.io/dice-roller.html" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What types of dice can I roll?", "acceptedAnswer": { "@type": "Answer", "text": "You can roll D4, D6, D8, D10, D12, D20, and D100 standard dice, plus any custom number of sides you choose." } },
+        { "@type": "Question", "name": "Can I roll multiple dice at once?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! You can roll up to 20 dice of the same type simultaneously and see the individual results and total sum." } },
+        { "@type": "Question", "name": "Is this good for D&D?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. We have D&D presets for common roll combinations like 2D6, 4D6 drop lowest for stats, initiative, and damage rolls." } }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
+:root{
+  --pri:#10B981;--pri-dk:#059669;--pri-lt:#ECFDF5;
+  --bg:#F8F9FC;--bg2:#EEF1F7;--srf:#fff;--bdr:#E2E8F0;
+  --txt:#1A202C;--txt2:#4A5568;--txt3:#94A3B8;
+  --r:16px;--r-sm:10px;--sh:0 4px 24px rgba(0,0,0,.07);--sh-lg:0 12px 48px rgba(0,0,0,.13);
+  --nav-h:64px;--f:Nunito,sans-serif;--fd:'Space Grotesk',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--f);background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden;padding-top:var(--nav-h);}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+ul{list-style:none;}
+
+/* HEADER */
+#hdr{position:fixed;inset:0 0 auto 0;z-index:900;height:var(--nav-h);background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s;}
+#hdr.scrolled{border-color:var(--bdr);box-shadow:0 2px 18px rgba(0,0,0,.07);}
+.hdr-in{max-width:1200px;margin:0 auto;height:100%;display:flex;align-items:center;gap:8px;padding:0 20px;}
+.logo{display:flex;align-items:center;gap:7px;font-family:var(--fd);font-weight:700;font-size:1.1rem;flex-shrink:0;}
+.logo-icon{font-size:1.35rem;}
+.nav{display:flex;align-items:center;gap:2px;margin-left:auto;flex-wrap:wrap;}
+.nav a{display:block;padding:7px 10px;border-radius:8px;font-size:.8rem;font-weight:700;color:var(--txt2);transition:background .15s,color .15s;white-space:nowrap;}
+.nav a:hover,.nav a.active{background:var(--pri-lt);color:var(--pri);}
+.burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:34px;height:34px;margin-left:auto;flex-shrink:0;}
+.burger span{display:block;height:2px;background:var(--txt);border-radius:2px;transition:transform .3s,opacity .3s;}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#ECFDF5 0%,#D1FAE5 40%,#EEF4FF 100%);padding:52px 20px 40px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(16,185,129,.08) 0%,transparent 60%);}
+.hero-in{position:relative;max-width:620px;margin:0 auto;}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.12);color:var(--pri);padding:5px 14px;border-radius:50px;font-size:.76rem;font-weight:800;margin-bottom:14px;border:1px solid rgba(16,185,129,.25);text-transform:uppercase;letter-spacing:.06em;}
+.hero h1{font-family:var(--fd);font-size:clamp(2rem,5vw,3.2rem);font-weight:700;line-height:1.15;margin-bottom:12px;}
+.hero h1 span{color:var(--pri);}
+.hero p{font-size:1rem;color:var(--txt2);max-width:480px;margin:0 auto;}
+
+/* APP */
+.app-wrap{max-width:860px;margin:-24px auto 0;padding:0 20px;position:relative;z-index:2;}
+.card{background:var(--srf);border-radius:24px;box-shadow:var(--sh-lg);overflow:hidden;}
+.card-body{padding:32px 28px;}
+
+/* DICE TYPE SELECTOR */
+.dice-types{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:20px;}
+.dice-type-btn{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:10px 4px;border-radius:12px;border:2px solid var(--bdr);
+  transition:all .15s;color:var(--txt2);
+}
+.dice-type-btn .d-emoji{font-size:1.4rem;}
+.dice-type-btn .d-label{font-size:.7rem;font-weight:800;letter-spacing:.02em;}
+.dice-type-btn:hover,.dice-type-btn.active{
+  border-color:var(--pri);background:var(--pri-lt);color:var(--pri);
+  transform:translateY(-2px);box-shadow:0 4px 12px rgba(16,185,129,.2);
+}
+
+/* Custom dice */
+.custom-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.custom-label{font-size:.82rem;font-weight:800;color:var(--txt2);white-space:nowrap;}
+.custom-input{
+  width:90px;padding:9px 12px;border:2px solid var(--bdr);border-radius:var(--r-sm);
+  font-family:var(--fd);font-size:1rem;font-weight:700;text-align:center;outline:none;
+  transition:border-color .2s;
+}
+.custom-input:focus{border-color:var(--pri);}
+.custom-input::-webkit-inner-spin-button{-webkit-appearance:none;}
+
+/* Count row */
+.count-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.cnt-label{font-size:.82rem;font-weight:800;color:var(--txt2);}
+.cnt-btns{display:flex;align-items:center;gap:6px;}
+.cnt-btn{width:32px;height:32px;border-radius:50%;border:2px solid var(--bdr);font-size:1.1rem;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all .15s;color:var(--txt2);}
+.cnt-btn:hover{border-color:var(--pri);color:var(--pri);}
+.cnt-val{font-family:var(--fd);font-size:1rem;font-weight:700;min-width:28px;text-align:center;}
+.modifier-wrap{display:flex;align-items:center;gap:6px;margin-left:16px;}
+.mod-label{font-size:.82rem;font-weight:800;color:var(--txt2);}
+.mod-input{width:70px;padding:8px 10px;border:2px solid var(--bdr);border-radius:var(--r-sm);font-family:var(--fd);font-size:.95rem;font-weight:700;text-align:center;outline:none;transition:border-color .2s;}
+.mod-input:focus{border-color:var(--pri);}
+.mod-input::-webkit-inner-spin-button{-webkit-appearance:none;}
+
+/* D&D Presets */
+.preset-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px;}
+.p-chip{padding:6px 13px;border-radius:50px;border:1.5px solid var(--bdr);font-size:.78rem;font-weight:700;color:var(--txt2);transition:all .15s;}
+.p-chip:hover,.p-chip.active{border-color:var(--pri);color:var(--pri);background:var(--pri-lt);}
+
+/* Roll button */
+.roll-btn{width:100%;padding:16px;border-radius:50px;background:linear-gradient(135deg,var(--pri),var(--pri-dk));color:#fff;font-family:var(--fd);font-size:1.15rem;font-weight:700;letter-spacing:.02em;box-shadow:0 6px 22px rgba(16,185,129,.38);transition:all .2s;}
+.roll-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(16,185,129,.48);}
+.roll-btn:active{transform:scale(.97);}
+.roll-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+
+/* Dice display */
+.dice-stage{
+  margin-top:24px;min-height:140px;border-radius:18px;
+  background:linear-gradient(135deg,#ECFDF5,#EEF4FF);
+  border:2px solid transparent;padding:24px;
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+  transition:border-color .3s;
+}
+.dice-stage.rolled{border-color:var(--pri);}
+.dice-idle{color:var(--txt3);font-size:.95rem;}
+.dice-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+.die{
+  display:flex;align-items:center;justify-content:center;
+  border-radius:14px;font-family:var(--fd);font-weight:700;
+  background:#fff;border:3px solid var(--pri);color:var(--pri);
+  box-shadow:0 4px 14px rgba(16,185,129,.18);
+  animation:diePop .4s cubic-bezier(.175,.885,.32,1.275) both;
+  position:relative;
+}
+@keyframes diePop{from{opacity:0;transform:scale(.3) rotate(-20deg);}to{opacity:1;transform:scale(1) rotate(0);}}
+.die.big{width:80px;height:80px;font-size:1.8rem;}
+.die.med{width:62px;height:62px;font-size:1.4rem;}
+.die.sm{width:50px;height:50px;font-size:1.1rem;}
+.die.xs{width:40px;height:40px;font-size:.85rem;}
+
+/* D6 pips */
+.die.d6-pip{flex-direction:column;gap:2px;padding:6px;}
+.die.d6-pip .pip-row{display:flex;gap:4px;justify-content:center;}
+.pip{width:8px;height:8px;border-radius:50%;background:var(--pri);}
+.pip.inv{background:transparent;}
+
+.sum-display{font-family:var(--fd);font-size:1.4rem;font-weight:700;text-align:center;}
+.sum-display .sum-num{color:var(--pri);font-size:1.8rem;}
+.sum-display .sum-detail{font-size:.82rem;color:var(--txt3);font-weight:600;margin-top:4px;}
+.roll-again-btn{padding:9px 24px;border-radius:50px;border:2px solid var(--pri);color:var(--pri);font-size:.85rem;font-weight:700;transition:all .15s;background:var(--pri-lt);}
+.roll-again-btn:hover{background:var(--pri);color:#fff;}
+
+/* Roll history */
+.hist-section{margin-top:20px;padding-top:18px;border-top:1px solid var(--bg2);}
+.hist-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--txt3);}
+.hist-clear{color:#e74c3c;font-weight:700;}
+.hist-rows{display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto;}
+.hist-rows::-webkit-scrollbar{width:4px;}
+.hist-rows::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:4px;}
+.hist-row{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bg);border-radius:var(--r-sm);font-size:.85rem;}
+.hist-dice{font-size:.75rem;color:var(--txt3);min-width:60px;}
+.hist-vals{flex:1;font-weight:700;color:var(--pri);}
+.hist-sum{font-family:var(--fd);font-weight:700;color:var(--txt);}
+.hist-time{font-size:.72rem;color:var(--txt3);}
+
+/* Sections */
+.section{padding:64px 20px;}
+.section-alt{background:var(--bg2);}
+.wrap{max-width:1100px;margin:0 auto;}
+.wrap-sm{max-width:740px;margin:0 auto;}
+.sec-label{display:inline-block;background:rgba(16,185,129,.1);color:var(--pri);padding:4px 13px;border-radius:50px;font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;}
+.sec-title{font-family:var(--fd);font-size:clamp(1.6rem,3.5vw,2.3rem);font-weight:700;margin-bottom:10px;line-height:1.25;}
+.sec-desc{font-size:.95rem;color:var(--txt2);max-width:540px;}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin-top:36px;}
+.ic{background:var(--srf);border:1.5px solid var(--bdr);border-radius:var(--r);padding:22px 18px;transition:all .25s;}
+.ic:hover{border-color:var(--pri);transform:translateY(-3px);box-shadow:var(--sh);}
+.ic-icon{font-size:1.8rem;margin-bottom:8px;}
+.ic h3{font-family:var(--fd);font-size:.95rem;margin-bottom:5px;}
+.ic p{font-size:.82rem;color:var(--txt2);}
+.faq-list{margin-top:32px;}
+.faq-item{border-bottom:1px solid var(--bdr);}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;padding:15px 0;font-weight:700;font-size:.92rem;cursor:pointer;background:none;color:var(--txt);text-align:left;gap:16px;}
+.faq-icon{width:24px;height:24px;border-radius:50%;border:2px solid var(--bdr);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem;transition:all .2s;}
+.faq-item.open .faq-icon{background:var(--pri);border-color:var(--pri);color:#fff;transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.faq-a p{padding:0 0 15px;font-size:.88rem;color:var(--txt2);}
+.faq-item.open .faq-a{max-height:300px;}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;}
+.tag{background:var(--bg2);color:var(--txt2);border:1px solid var(--bdr);padding:4px 11px;border-radius:50px;font-size:.76rem;font-weight:700;}
+.aos{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s;}
+.aos.vis{opacity:1;transform:none;}
+.aos:nth-child(2){transition-delay:.1s;}
+.aos:nth-child(3){transition-delay:.2s;}
+.aos:nth-child(4){transition-delay:.3s;}
+
+/* FOOTER */
+#ftr{background:#111827;color:rgba(255,255,255,.75);padding:48px 20px 0;margin-top:80px;}
+.ftr-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:40px;padding-bottom:40px;}
+.ftr-brand p{font-size:.82rem;opacity:.6;margin-top:8px;line-height:1.7;}
+.ftr-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.ftr-col h4{font-size:.75rem;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;}
+.ftr-col li{margin-bottom:6px;}
+.ftr-col a{font-size:.8rem;opacity:.6;transition:opacity .2s;}
+.ftr-col a:hover{opacity:1;}
+.ftr-bot{max-width:1200px;margin:0 auto;padding:16px 0;border-top:1px solid rgba(255,255,255,.08);font-size:.75rem;opacity:.4;color:#fff;}
+.ftr-bot a{color:#fff;}
+
+@media(max-width:700px){
+  .nav{display:none;position:fixed;top:var(--nav-h);inset-inline:0;bottom:0;background:#fff;flex-direction:column;align-items:flex-start;padding:20px;gap:2px;overflow-y:auto;z-index:888;}
+  .nav.open{display:flex;}
+  .nav a{padding:11px 14px;font-size:.95rem;width:100%;}
+  .burger{display:flex;}
+  .card-body{padding:22px 16px;}
+  .dice-types{grid-template-columns:repeat(4,1fr);}
+  .ftr-in{grid-template-columns:1fr;gap:24px;}
+  .ftr-cols{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:420px){
+  .ftr-cols{grid-template-columns:1fr;}
+  .dice-types{grid-template-columns:repeat(4,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="hdr-in">
+    <a href="index.html" class="logo"><span class="logo-icon">🎡</span><span>WheelGenerator</span></a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav" id="nav">
+      <li><a href="index.html">🎡 Spin Wheel</a></li>
+      <li><a href="decision-maker.html">🎯 Decision Maker</a></li>
+      <li><a href="random-number-generator.html">🔢 Number Generator</a></li>
+      <li><a href="coin-flip.html">🪙 Coin Flip</a></li>
+      <li><a href="dice-roller.html" class="active">🎲 Dice Roller</a></li>
+      <li><a href="random-name-picker.html">👤 Name Picker</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-in">
+    <div class="badge">🎲 Free Tool</div>
+    <h1>Online <span>Dice Roller</span></h1>
+    <p>Roll D4, D6, D8, D10, D12, D20, D100 and custom dice instantly. Perfect for D&amp;D, tabletop RPGs, board games and more. Free, no signup.</p>
+  </div>
+</section>
+
+<!-- APP -->
+<div class="app-wrap">
+<div class="card">
+<div class="card-body">
+
+  <!-- Dice type selector -->
+  <div style="font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--txt3);margin-bottom:8px;">Choose Dice Type</div>
+  <div class="dice-types" id="diceTypes">
+    <button class="dice-type-btn" data-sides="4"><span class="d-emoji">▲</span><span class="d-label">D4</span></button>
+    <button class="dice-type-btn active" data-sides="6"><span class="d-emoji">🎲</span><span class="d-label">D6</span></button>
+    <button class="dice-type-btn" data-sides="8"><span class="d-emoji">◆</span><span class="d-label">D8</span></button>
+    <button class="dice-type-btn" data-sides="10"><span class="d-emoji">⬟</span><span class="d-label">D10</span></button>
+    <button class="dice-type-btn" data-sides="12"><span class="d-emoji">⬡</span><span class="d-label">D12</span></button>
+    <button class="dice-type-btn" data-sides="20"><span class="d-emoji">🔮</span><span class="d-label">D20</span></button>
+    <button class="dice-type-btn" data-sides="100"><span class="d-emoji">💯</span><span class="d-label">D100</span></button>
+  </div>
+
+  <!-- Custom + count row -->
+  <div class="custom-row">
+    <span class="custom-label">Custom sides:</span>
+    <input class="custom-input" type="number" id="customSides" placeholder="e.g. 30" min="2" max="9999"/>
+    <button class="p-chip" id="useCustomBtn">Use Custom</button>
+  </div>
+
+  <div class="count-row">
+    <span class="cnt-label">Number of dice:</span>
+    <div class="cnt-btns">
+      <button class="cnt-btn" id="cntMinus">−</button>
+      <span class="cnt-val" id="cntVal">1</span>
+      <button class="cnt-btn" id="cntPlus">+</button>
+    </div>
+    <div class="modifier-wrap">
+      <span class="mod-label">Modifier:</span>
+      <input class="mod-input" type="number" id="modifier" value="0" min="-999" max="999"/>
+    </div>
+  </div>
+
+  <!-- D&D presets -->
+  <div style="font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--txt3);margin-bottom:8px;">D&amp;D Presets</div>
+  <div class="preset-row" id="presetRow">
+    <button class="p-chip" data-sides="20" data-count="1" data-mod="0">D20 Check</button>
+    <button class="p-chip" data-sides="6" data-count="2" data-mod="0">2D6 Damage</button>
+    <button class="p-chip" data-sides="8" data-count="1" data-mod="3">D8+3 Heal</button>
+    <button class="p-chip" data-sides="6" data-count="4" data-mod="0" data-droplow="1">4D6 Drop Low</button>
+    <button class="p-chip" data-sides="10" data-count="1" data-mod="0">D10 Initiative</button>
+    <button class="p-chip" data-sides="6" data-count="3" data-mod="0">3D6 Stats</button>
+    <button class="p-chip" data-sides="12" data-count="1" data-mod="5">D12+5 Attack</button>
+  </div>
+
+  <!-- Roll button -->
+  <button class="roll-btn" id="rollBtn">🎲 Roll the Dice!</button>
+
+  <!-- Dice display -->
+  <div class="dice-stage" id="diceStage">
+    <div class="dice-idle" id="diceIdle">Your roll will appear here — click the button or shake your device!</div>
+    <div class="dice-grid" id="diceGrid" style="display:none;"></div>
+    <div class="sum-display" id="sumDisplay" style="display:none;"></div>
+    <button class="roll-again-btn" id="rollAgainBtn" style="display:none;">🔄 Roll Again</button>
+  </div>
+
+  <!-- History -->
+  <div class="hist-section" id="histSection" style="display:none;">
+    <div class="hist-head">
+      <span>Roll History</span>
+      <button class="hist-clear" id="clearHist">Clear</button>
+    </div>
+    <div class="hist-rows" id="histRows"></div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<!-- FEATURES -->
+<section class="section">
+<div class="wrap">
+  <div class="sec-label">Features</div>
+  <h2 class="sec-title">The Most Complete Online Dice Roller</h2>
+  <p class="sec-desc">Every dice type you need, with powerful options for any game.</p>
+  <div class="info-grid">
+    <div class="ic aos"><div class="ic-icon">🎲</div><h3>All Standard Dice</h3><p>D4, D6, D8, D10, D12, D20, D100 — all the standard tabletop dice types in one place.</p></div>
+    <div class="ic aos"><div class="ic-icon">⚙️</div><h3>Custom Dice</h3><p>Need a D30 or D7? Enter any number of sides for a completely custom die.</p></div>
+    <div class="ic aos"><div class="ic-icon">🎯</div><h3>Modifiers</h3><p>Add or subtract modifiers to your roll total — essential for D&amp;D attack rolls and saving throws.</p></div>
+    <div class="ic aos"><div class="ic-icon">🐉</div><h3>D&amp;D Presets</h3><p>One-click presets for common D&amp;D scenarios: stat rolls, initiative, damage, and healing.</p></div>
+    <div class="ic aos"><div class="ic-icon">📱</div><h3>Shake to Roll</h3><p>On mobile devices, shake your phone to roll the dice — just like the real thing!</p></div>
+    <div class="ic aos"><div class="ic-icon">📜</div><h3>Roll History</h3><p>Full history of every roll in your session with individual values and totals.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- USE CASES -->
+<section class="section section-alt">
+<div class="wrap-sm">
+  <div class="sec-label">Use Cases</div>
+  <h2 class="sec-title">Perfect for Every Game</h2>
+  <div class="info-grid" style="margin-top:28px;">
+    <div class="ic aos"><div class="ic-icon">🐉</div><h3>D&amp;D &amp; RPGs</h3><p>Full set of polyhedral dice for Dungeons &amp; Dragons, Pathfinder, and any tabletop RPG.</p></div>
+    <div class="ic aos"><div class="ic-icon">🎯</div><h3>Board Games</h3><p>Standard D6 dice for Monopoly, Catan, Yahtzee and hundreds of classic board games.</p></div>
+    <div class="ic aos"><div class="ic-icon">🏫</div><h3>Education</h3><p>Teach probability, statistics, and expected value with a free virtual dice simulator.</p></div>
+    <div class="ic aos"><div class="ic-icon">🎮</div><h3>Video Games</h3><p>Simulate random events, loot tables, or procedural generation for game design.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- SEO CONTENT -->
+<section class="section">
+<div class="wrap-sm">
+  <div class="sec-label">About This Tool</div>
+  <h2 class="sec-title">Free Online Dice Roller — Roll Any Dice</h2>
+  <p style="color:var(--txt2);margin-bottom:14px;">Our <strong>free online dice roller</strong> is the most complete virtual dice simulator available. Whether you play Dungeons &amp; Dragons, Pathfinder, Call of Cthulhu, or any other tabletop RPG, you'll find every die type you need — D4, D6, D8, D10, D12, D20, and D100 — all in one place.</p>
+  <p style="color:var(--txt2);margin-bottom:14px;">Roll multiple dice at once, add modifiers, use the <strong>4D6 drop lowest</strong> mechanic for D&amp;D character creation, or define a completely custom die with any number of sides. The mobile-friendly design even supports shake-to-roll on phones and tablets.</p>
+  <p style="color:var(--txt2);margin-bottom:20px;">All rolls use cryptographically secure randomness via the Web Crypto API — ensuring truly unbiased results for every session. Your roll history is kept throughout your session so you can refer back to past results.</p>
+  <div class="tag-cloud">
+    <span class="tag">dice roller online</span>
+    <span class="tag">D&D dice roller</span>
+    <span class="tag">roll dice online</span>
+    <span class="tag">virtual dice</span>
+    <span class="tag">D20 roller</span>
+    <span class="tag">random dice generator</span>
+    <span class="tag">tabletop dice simulator</span>
+  </div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-alt">
+<div class="wrap-sm">
+  <div class="sec-label">FAQ</div>
+  <h2 class="sec-title">Frequently Asked Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <button class="faq-q">What types of dice can I roll? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>You can roll D4, D6, D8, D10, D12, D20, and D100 standard polyhedral dice. You can also enter any custom number of sides (like a D30 or D7) using the custom input field.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Can I roll multiple dice at once? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Yes! Use the +/− buttons to set how many dice to roll (up to 20). All dice are rolled simultaneously and you see each individual result plus the total sum with modifier.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What is the 4D6 Drop Lowest option? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>This is the standard D&amp;D character stat generation method: roll 4 D6 dice and discard the lowest result, summing the remaining three. This produces ability scores between 3 and 18 with a slightly heroic average.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Does shake-to-roll work on mobile? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Yes! On supported mobile devices, shaking your phone triggers a roll — just like shaking a real cup of dice. Some browsers require motion permission to be granted first.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is this dice roller free? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>100% free with no signup required. Roll as many times as you like on any device.</p></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer id="ftr">
+  <div class="ftr-in">
+    <div class="ftr-brand">
+      <a href="index.html" class="logo" style="color:#fff;margin-bottom:6px;display:inline-flex;"><span class="logo-icon">🎡</span><span>WheelGenerator</span></a>
+      <p>Free online random tools — spin wheels, flip coins, roll dice, pick names and more. No signup needed.</p>
+    </div>
+    <div class="ftr-cols">
+      <div class="ftr-col"><h4>Tools</h4><ul>
+        <li><a href="index.html">Spin the Wheel</a></li>
+        <li><a href="decision-maker.html">Decision Maker</a></li>
+        <li><a href="random-number-generator.html">Number Generator</a></li>
+        <li><a href="coin-flip.html">Coin Flip</a></li>
+        <li><a href="dice-roller.html">Dice Roller</a></li>
+        <li><a href="random-name-picker.html">Name Picker</a></li>
+      </ul></div>
+      <div class="ftr-col"><h4>Dice Types</h4><ul>
+        <li><a href="dice-roller.html">D6 Dice Roller</a></li>
+        <li><a href="dice-roller.html">D20 Roller</a></li>
+        <li><a href="dice-roller.html">D100 Percentile</a></li>
+        <li><a href="dice-roller.html">D&amp;D Dice Set</a></li>
+        <li><a href="dice-roller.html">Custom Dice</a></li>
+      </ul></div>
+      <div class="ftr-col"><h4>Company</h4><ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="ftr-bot"><p>&copy; <span id="yr"></span> <a href="https://wheelgenerator.github.io">WheelGenerator.github.io</a> — Free Online Random Tools</p></div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Header
+const hdr=document.getElementById('hdr'),burger=document.getElementById('burger'),nav=document.getElementById('nav');
+burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.classList.toggle('open',o);burger.setAttribute('aria-expanded',o);});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.classList.remove('open');}));
+window.addEventListener('scroll',()=>hdr.classList.toggle('scrolled',window.scrollY>40));
+
+// FAQ
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{const item=btn.closest('.faq-item'),isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open');});
+});
+
+// AOS
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.1});
+document.querySelectorAll('.aos').forEach(el=>obs.observe(el));
+
+// ── DICE ROLLER ──────────────────────────────────────────────────────
+let currentSides = 6;
+let diceCount = 1;
+let historyArr = [];
+let isRolling = false;
+
+function secureRandInt(min, max) {
+  const range = max - min + 1;
+  const buf = new Uint32Array(1);
+  const limit = Math.floor(0x100000000 / range) * range;
+  do { crypto.getRandomValues(buf); } while (buf[0] >= limit);
+  return min + (buf[0] % range);
+}
+
+function playRollSound() {
+  try {
+    const ac = new (window.AudioContext || window.webkitAudioContext)();
+    for (let i = 0; i < 4; i++) {
+      setTimeout(() => {
+        const o = ac.createOscillator(), g = ac.createGain();
+        o.connect(g); g.connect(ac.destination);
+        o.frequency.value = 150 + Math.random() * 300;
+        o.type = 'triangle';
+        g.gain.setValueAtTime(.08, ac.currentTime);
+        g.gain.exponentialRampToValueAtTime(.001, ac.currentTime + .1);
+        o.start(); o.stop(ac.currentTime + .1);
+      }, i * 80);
+    }
+  } catch(e) {}
+}
+
+function getDieSizeClass(count) {
+  if (count === 1) return 'big';
+  if (count <= 4) return 'med';
+  if (count <= 9) return 'sm';
+  return 'xs';
+}
+
+function renderD6Pips(val) {
+  const patterns = {
+    1: [[0,0,1,0,0]],
+    2: [[1,0,0,0,1]],
+    3: [[1,0,0,0,1],[0,0,1,0,0]],
+    4: [[1,0,1],[1,0,1]],
+    5: [[1,0,1],[0,1,0],[1,0,1]],
+    6: [[1,0,1],[1,0,1],[1,0,1]]
+  };
+  const rows = patterns[val] || patterns[1];
+  return rows.map(row => `<div class="pip-row">${row.map(p => `<div class="pip${p ? '' : ' inv'}"></div>`).join('')}</div>`).join('');
+}
+
+function roll(sides, count, mod, dropLow) {
+  if (isRolling) return;
+  isRolling = true;
+  const btn = document.getElementById('rollBtn');
+  const againBtn = document.getElementById('rollAgainBtn');
+  btn.disabled = true;
+  againBtn.style.display = 'none';
+
+  const stage = document.getElementById('diceStage');
+  const grid = document.getElementById('diceGrid');
+  const sumEl = document.getElementById('sumDisplay');
+  const idle = document.getElementById('diceIdle');
+
+  idle.style.display = 'none';
+  grid.style.display = 'flex';
+  sumEl.style.display = 'none';
+  stage.classList.remove('rolled');
+
+  // Animate placeholder
+  grid.innerHTML = Array(count).fill(0).map(() =>
+    `<div class="die ${getDieSizeClass(count)}" style="color:var(--txt3);border-color:var(--bdr);animation:none;">?</div>`
+  ).join('');
+
+  playRollSound();
+
+  setTimeout(() => {
+    let results = Array(count).fill(0).map(() => secureRandInt(1, sides));
+    const rawResults = [...results];
+
+    let dropped = [];
+    if (dropLow && results.length > 1) {
+      const minVal = Math.min(...results);
+      const minIdx = results.indexOf(minVal);
+      dropped.push(minIdx);
+      results = results.filter((_, i) => i !== minIdx);
+    }
+
+    const sizeClass = getDieSizeClass(count);
+    grid.innerHTML = rawResults.map((val, i) => {
+      const isDropped = dropped.includes(i);
+      const usePips = sides === 6 && count <= 8;
+      const style = isDropped ? 'opacity:.3;text-decoration:line-through;filter:grayscale(1);' : `animation-delay:${i*.07}s`;
+      if (usePips && !isDropped) {
+        return `<div class="die d6-pip ${sizeClass}" style="${style}">${renderD6Pips(val)}</div>`;
+      }
+      return `<div class="die ${sizeClass}" style="${style}">${val}</div>`;
+    }).join('');
+
+    const total = results.reduce((a, b) => a + b, 0) + mod;
+    sumEl.style.display = 'block';
+
+    let detail = `${count}D${sides}`;
+    if (dropLow) detail += ' drop lowest';
+    if (mod !== 0) detail += ` ${mod > 0 ? '+' : ''}${mod}`;
+    const indiv = results.join(', ');
+    const modStr = mod !== 0 ? ` ${mod > 0 ? '+' : ''}${mod} = ${total}` : '';
+
+    sumEl.innerHTML = `
+      <div><span class="sum-num">${total}</span></div>
+      <div class="sum-detail">Rolls: [${indiv}]${modStr}</div>
+    `;
+    stage.classList.add('rolled');
+    againBtn.style.display = 'inline-flex';
+
+    addHistory(sides, count, rawResults, results, total, mod, dropLow);
+    isRolling = false;
+    btn.disabled = false;
+  }, 600);
+}
+
+function addHistory(sides, count, rawVals, vals, total, mod, dropLow) {
+  historyArr.unshift({ sides, count, rawVals, vals, total, mod, dropLow, time: new Date().toLocaleTimeString() });
+  if (historyArr.length > 30) historyArr.pop();
+  renderHistory();
+}
+
+function renderHistory() {
+  const sect = document.getElementById('histSection');
+  const rows = document.getElementById('histRows');
+  sect.style.display = historyArr.length ? 'block' : 'none';
+  rows.innerHTML = historyArr.map(h => `
+    <div class="hist-row">
+      <span class="hist-dice">${h.count}D${h.sides}${h.mod !== 0 ? (h.mod > 0 ? '+' : '') + h.mod : ''}</span>
+      <span class="hist-vals">[${h.rawVals.join(', ')}]</span>
+      <span class="hist-sum">= ${h.total}</span>
+      <span class="hist-time">${h.time}</span>
+    </div>`).join('');
+}
+
+// Dice type buttons
+document.getElementById('diceTypes').addEventListener('click', e => {
+  const btn = e.target.closest('.dice-type-btn');
+  if (!btn) return;
+  document.querySelectorAll('.dice-type-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentSides = parseInt(btn.dataset.sides);
+  document.getElementById('customSides').value = '';
+  updateRollBtn();
+});
+
+// Custom dice
+document.getElementById('useCustomBtn').addEventListener('click', () => {
+  const val = parseInt(document.getElementById('customSides').value);
+  if (!val || val < 2) { alert('Please enter a number of 2 or more.'); return; }
+  document.querySelectorAll('.dice-type-btn').forEach(b => b.classList.remove('active'));
+  currentSides = val;
+  updateRollBtn();
+});
+
+// Count
+let cnt = 1;
+document.getElementById('cntMinus').addEventListener('click', () => { if (cnt > 1) { cnt--; document.getElementById('cntVal').textContent = cnt; updateRollBtn(); } });
+document.getElementById('cntPlus').addEventListener('click', () => { if (cnt < 20) { cnt++; document.getElementById('cntVal').textContent = cnt; updateRollBtn(); } });
+
+function updateRollBtn() {
+  document.getElementById('rollBtn').textContent = cnt === 1
+    ? `🎲 Roll D${currentSides}!`
+    : `🎲 Roll ${cnt}D${currentSides}!`;
+}
+
+// Presets
+document.getElementById('presetRow').addEventListener('click', e => {
+  const chip = e.target.closest('.p-chip');
+  if (!chip || !chip.dataset.sides) return;
+  document.querySelectorAll('.p-chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  currentSides = parseInt(chip.dataset.sides);
+  cnt = parseInt(chip.dataset.count || 1);
+  document.getElementById('cntVal').textContent = cnt;
+  document.getElementById('modifier').value = chip.dataset.mod || 0;
+  document.querySelectorAll('.dice-type-btn').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.sides) === currentSides);
+  });
+  updateRollBtn();
+  roll(currentSides, cnt, parseInt(chip.dataset.mod || 0), !!chip.dataset.droplow);
+});
+
+// Roll button
+document.getElementById('rollBtn').addEventListener('click', () => {
+  roll(currentSides, cnt, parseInt(document.getElementById('modifier').value) || 0, false);
+});
+document.getElementById('rollAgainBtn').addEventListener('click', () => {
+  roll(currentSides, cnt, parseInt(document.getElementById('modifier').value) || 0, false);
+});
+
+// Clear history
+document.getElementById('clearHist').addEventListener('click', () => { historyArr = []; renderHistory(); });
+
+// Shake to roll (mobile)
+let lastShake = 0;
+if (window.DeviceMotionEvent) {
+  window.addEventListener('devicemotion', e => {
+    const a = e.accelerationIncludingGravity;
+    if (!a) return;
+    const force = Math.abs(a.x) + Math.abs(a.y) + Math.abs(a.z);
+    if (force > 25 && Date.now() - lastShake > 1500) {
+      lastShake = Date.now();
+      roll(currentSides, cnt, parseInt(document.getElementById('modifier').value) || 0, false);
+    }
+  });
+}
+
+updateRollBtn();
+</script>
+</body>
+</html>
