@@ -372,6 +372,15 @@
   <script src="header.js" type="module"></script>
   <script src="footer.js" type="module"></script>
 
+  <script type="module">
+    import HeaderComponent from './header.js';
+    import FooterComponent from './footer.js';
+
+    // Safely render the layout structures
+    HeaderComponent.render();
+    FooterComponent.render();
+  </script>
+
   <!-- Coin flip inline script (non-module) -->
   <script>
     (function() {
