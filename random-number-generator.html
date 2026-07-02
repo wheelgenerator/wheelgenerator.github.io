@@ -72,33 +72,6 @@ a{text-decoration:none;color:inherit;}
 button{cursor:pointer;border:none;background:none;font-family:inherit;}
 ul{list-style:none;}
 
-/* HEADER */
-#hdr{position:fixed;inset:0 0 auto 0;z-index:900;height:var(--nav-h);background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s;}
-#hdr.scrolled{border-color:var(--bdr);box-shadow:0 2px 18px rgba(0,0,0,.07);}
-.hdr-in{max-width:1200px;margin:0 auto;height:100%;display:flex;align-items:center;gap:8px;padding:0 20px;}
-.logo{display:flex;align-items:center;gap:7px;font-family:var(--fd);font-weight:700;font-size:1.1rem;flex-shrink:0;}
-.logo-icon{font-size:1.35rem;}
-.nav{display:flex;align-items:center;gap:2px;margin-left:auto;flex-wrap:wrap;}
-.nav a{display:block;padding:7px 10px;border-radius:8px;font-size:.8rem;font-weight:700;color:var(--txt2);transition:background .15s,color .15s;white-space:nowrap;}
-.nav a:hover,.nav a.active{background:var(--pri-lt);color:var(--pri);}
-.burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:34px;height:34px;margin-left:auto;flex-shrink:0;}
-.burger span{display:block;height:2px;background:var(--txt);border-radius:2px;transition:transform .3s,opacity .3s;}
-.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.burger.open span:nth-child(2){opacity:0;}
-.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-
-/* FOOTER */
-#ftr{background:#111827;color:rgba(255,255,255,.75);padding:48px 20px 0;margin-top:80px;}
-.ftr-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:40px;padding-bottom:40px;}
-.ftr-brand p{font-size:.82rem;opacity:.6;margin-top:8px;line-height:1.7;}
-.ftr-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.ftr-col h4{font-size:.75rem;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;}
-.ftr-col li{margin-bottom:6px;}
-.ftr-col a{font-size:.8rem;opacity:.6;transition:opacity .2s;}
-.ftr-col a:hover{opacity:1;}
-.ftr-bot{max-width:1200px;margin:0 auto;padding:16px 0;border-top:1px solid rgba(255,255,255,.08);font-size:.75rem;opacity:.4;color:#fff;}
-.ftr-bot a{color:#fff;}
-
 /* HERO */
 .hero{background:linear-gradient(135deg,#F0EEFF 0%,#F5F0FF 50%,#EEF4FF 100%);padding:52px 20px 40px;text-align:center;position:relative;overflow:hidden;}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 60%,rgba(108,92,231,.08) 0%,transparent 60%),radial-gradient(ellipse at 75% 20%,rgba(108,92,231,.06) 0%,transparent 60%);}
@@ -412,18 +385,6 @@ ul{list-style:none;}
   <script src="footer.js"></script>
 
 <script>
-// ── Header ──────────────────────────────────────────────
-document.getElementById('yr').textContent = new Date().getFullYear();
-const hdr = document.getElementById('hdr');
-const burger = document.getElementById('burger');
-const nav = document.getElementById('nav');
-burger.addEventListener('click', () => {
-  const open = nav.classList.toggle('open');
-  burger.classList.toggle('open', open);
-  burger.setAttribute('aria-expanded', open);
-});
-nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); burger.classList.remove('open'); }));
-window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 40));
 
 // ── FAQ ──────────────────────────────────────────────────
 document.querySelectorAll('.faq-q').forEach(btn => {
