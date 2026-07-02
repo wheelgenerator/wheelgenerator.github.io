@@ -368,6 +368,15 @@
   <script src="/header.js" type="module"></script>
   <script src="/footer.js" type="module"></script>
 
+  <script type="module">
+    import HeaderComponent from './header.js';
+    import FooterComponent from './footer.js';
+
+    // Safely render the layout structures
+    HeaderComponent.render();
+    FooterComponent.render();
+  </script>
+
   <!-- RNG inline script (non-module) -->
   <script>    
     
