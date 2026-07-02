@@ -28,7 +28,7 @@ const HeaderComponent = {
             <li><a href="/#how-it-works" class="nav-link">How It Works</a></li>
             <li><a href="/#faq" class="nav-link">FAQ</a></li>
           </ul>
-          <a href="/#wheel-app" class="cta-btn">Spin Now</a>
+          <a href="#wheel-app" class="cta-btn">Spin Now</a>
         </div>
       </nav>
     `;
