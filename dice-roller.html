@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VBZ3RM362W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VBZ3RM362W');
+</script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Dice Roller — Free Online Dice Rolling Simulator | WheelGenerator</title>
 <meta name="description" content="Roll any dice online free — D4, D6, D8, D10, D12, D20, D100 and custom dice. Perfect for D&D, tabletop RPGs, board games and more. Beautiful 3D dice animation, roll history, and sum totals."/>
 <meta name="keywords" content="dice roller, roll dice online, D&D dice roller, dice simulator, virtual dice, D20 roller, D6 dice, tabletop dice, random dice roller, online dice"/>
-<link rel="canonical" href="https://wheelgenerator.github.io/dice-roller.html"/>
+<link rel="canonical" href="https://wheelgenerator.github.io/dice-roller"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  
 <meta property="og:title" content="Free Online Dice Roller — Roll Any Dice Instantly"/>
 <meta property="og:description" content="Roll D4, D6, D8, D10, D12, D20, D100 and custom dice online. Perfect for D&D, board games and more. Free, no signup."/>
-<meta property="og:url" content="https://wheelgenerator.github.io/dice-roller.html"/>
+<meta property="og:url" content="https://wheelgenerator.github.io/dice-roller"/>
 <meta property="og:type" content="website"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <script type="application/ld+json">
@@ -19,7 +30,7 @@
     {
       "@type": "WebApplication",
       "name": "Dice Roller",
-      "url": "https://wheelgenerator.github.io/dice-roller.html",
+      "url": "https://wheelgenerator.github.io/dice-roller",
       "description": "Free online dice roller. Roll D4, D6, D8, D10, D12, D20, D100 and custom dice. Includes 3D animation, roll history, sum totals, and D&D presets.",
       "applicationCategory": "GameApplication",
       "operatingSystem": "Any",
@@ -30,7 +41,7 @@
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "WheelGenerator", "item": "https://wheelgenerator.github.io/" },
-        { "@type": "ListItem", "position": 2, "name": "Dice Roller", "item": "https://wheelgenerator.github.io/dice-roller.html" }
+        { "@type": "ListItem", "position": 2, "name": "Dice Roller", "item": "https://wheelgenerator.github.io/dice-roller" }
       ]
     },
     {
@@ -249,20 +260,8 @@ ul{list-style:none;}
 <body>
 
 <!-- HEADER -->
-<header id="hdr">
-  <div class="hdr-in">
-    <a href="index.html" class="logo"><span class="logo-icon">🎡</span><span>WheelGenerator</span></a>
-    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    <ul class="nav" id="nav">
-      <li><a href="index.html">🎡 Spin Wheel</a></li>
-      <li><a href="decision-maker.html">🎯 Decision Maker</a></li>
-      <li><a href="random-number-generator.html">🔢 Number Generator</a></li>
-      <li><a href="coin-flip.html">🪙 Coin Flip</a></li>
-      <li><a href="dice-roller.html" class="active">🎲 Dice Roller</a></li>
-      <li><a href="random-name-picker.html">👤 Name Picker</a></li>
-    </ul>
-  </div>
-</header>
+  <!-- header injected by header.js -->
+  <div id="header-root"></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -428,38 +427,21 @@ ul{list-style:none;}
 </section>
 
 <!-- FOOTER -->
-<footer id="ftr">
-  <div class="ftr-in">
-    <div class="ftr-brand">
-      <a href="index.html" class="logo" style="color:#fff;margin-bottom:6px;display:inline-flex;"><span class="logo-icon">🎡</span><span>WheelGenerator</span></a>
-      <p>Free online random tools — spin wheels, flip coins, roll dice, pick names and more. No signup needed.</p>
-    </div>
-    <div class="ftr-cols">
-      <div class="ftr-col"><h4>Tools</h4><ul>
-        <li><a href="index.html">Spin the Wheel</a></li>
-        <li><a href="decision-maker.html">Decision Maker</a></li>
-        <li><a href="random-number-generator.html">Number Generator</a></li>
-        <li><a href="coin-flip.html">Coin Flip</a></li>
-        <li><a href="dice-roller.html">Dice Roller</a></li>
-        <li><a href="random-name-picker.html">Name Picker</a></li>
-      </ul></div>
-      <div class="ftr-col"><h4>Dice Types</h4><ul>
-        <li><a href="dice-roller.html">D6 Dice Roller</a></li>
-        <li><a href="dice-roller.html">D20 Roller</a></li>
-        <li><a href="dice-roller.html">D100 Percentile</a></li>
-        <li><a href="dice-roller.html">D&amp;D Dice Set</a></li>
-        <li><a href="dice-roller.html">Custom Dice</a></li>
-      </ul></div>
-      <div class="ftr-col"><h4>Company</h4><ul>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul></div>
-    </div>
-  </div>
-  <div class="ftr-bot"><p>&copy; <span id="yr"></span> <a href="https://wheelgenerator.github.io">WheelGenerator.github.io</a> — Free Online Random Tools</p></div>
-</footer>
+<!-- footer injected by footer.js -->
+  <div id="footer-root"></div>
+
+  <!-- scripts: header & footer same as index -->
+  <script src="/header.js" type="module"></script>
+  <script src="/footer.js" type="module"></script>
+
+  <script type="module">
+    import HeaderComponent from './header.js';
+    import FooterComponent from './footer.js';
+
+    // Safely render the layout structures
+    HeaderComponent.render();
+    FooterComponent.render();
+  </script>
 
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
