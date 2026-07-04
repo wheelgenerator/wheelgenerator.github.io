@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Blog — Spin Wheel Generator tips, use cases, and creative ideas for giveaways, classrooms, decision making, and fun." />
+  <title>Blog — Spin Wheel Tips & Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+  <style>
+    /* — reset & base — */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #fafbfc;
+      color: #1a202c;
+      line-height: 1.6;
+      padding-top: 72px;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* — header (simplified from main site) — */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e2e8f0;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+    }
+    .nav-container {
+      max-width: 1200px; width: 100%; margin: 0 auto;
+      display: flex; align-items: center; gap: 24px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 1.2rem;
+      color: #1a202c;
+    }
+    .logo-icon { font-size: 1.5rem; }
+    .nav-links {
+      display: flex; align-items: center; gap: 4px;
+      margin-left: auto;
+    }
+    .nav-link {
+      padding: 8px 12px; border-radius: 10px;
+      font-size: 0.9rem; font-weight: 600; color: #4a5568;
+      transition: 0.2s;
+    }
+    .nav-link:hover { color: #ff6b35; background: rgba(255,107,53,0.06); }
+    .cta-btn {
+      background: #ff6b35; color: #fff;
+      padding: 10px 22px; border-radius: 50px;
+      font-weight: 700; font-size: 0.9rem;
+      box-shadow: 0 4px 14px rgba(255,107,53,0.35);
+      transition: 0.2s;
+    }
+    .cta-btn:hover { background: #e85520; transform: translateY(-1px); }
+
+    /* — blog hero — */
+    .blog-hero {
+      background: linear-gradient(135deg, #fff8f5 0%, #f0f4ff 50%, #f5fff8 100%);
+      padding: 48px 24px 40px;
+      text-align: center;
+    }
+    .blog-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .blog-hero h1 span { color: #ff6b35; }
+    .blog-hero p {
+      font-size: 1.05rem;
+      color: #4a5568;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* — blog grid — */
+    .blog-section {
+      padding: 60px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 32px;
+      margin-top: 16px;
+    }
+    .blog-card {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: all 0.25s;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.10);
+      border-color: #ff6b35;
+    }
+    .blog-card-img {
+      height: 170px;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.2rem;
+      background: linear-gradient(145deg, #f0f4ff, #fff8f5);
+      color: #ff6b35;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+    .blog-card-body {
+      padding: 20px 22px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card-body h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      color: #1a202c;
+    }
+    .blog-card-body p {
+      font-size: 0.9rem;
+      color: #4a5568;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    .read-more {
+      font-weight: 700;
+      color: #ff6b35;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.9rem;
+      transition: 0.2s;
+      margin-top: auto;
+    }
+    .read-more:hover { gap: 10px; color: #e85520; }
+
+    /* — footer — */
+    .site-footer {
+      background: #1a202c;
+      color: rgba(255,255,255,0.8);
+      padding: 40px 24px 20px;
+      margin-top: 40px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-inner small { opacity: 0.6; font-size: 0.85rem; }
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      margin-left: 20px;
+      font-size: 0.9rem;
+    }
+    .footer-links a:hover { color: #ff6b35; }
+
+    /* — responsive — */
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .blog-hero { padding: 32px 16px; }
+      .blog-section { padding: 32px 16px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links a { margin: 0 10px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- header (simple) -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="/" class="logo"><span class="logo-icon">🎡</span> WheelGenerator</a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="#" class="nav-link">Blog</a>
+        <a href="#wheel-app" class="nav-link">Wheel</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#" class="cta-btn">Spin Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- blog hero -->
+  <section class="blog-hero">
+    <h1>Spin Wheel <span>Blog</span></h1>
+    <p>Tips, ideas, and creative ways to use spin wheels for giveaways, classrooms, decision making, and fun.</p>
+  </section>
+
+  <!-- blog cards grid -->
+  <section class="blog-section">
+    <div class="blog-grid">
+      <!-- 1. Giveaway -->
+      <article class="blog-card">
+        <div class="blog-card-img">🎁</div>
+        <div class="blog-card-body">
+          <h3>How to Create the Perfect Custom Spin Wheel for Your Next Giveaway</h3>
+          <p>Step-by-step guide with tips on entries, themes, removing winners, and sharing links. Highlight real giveaway use cases.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+      <!-- 2. Classroom -->
+      <article class="blog-card">
+        <div class="blog-card-img">🏫</div>
+        <div class="blog-card-body">
+          <h3>10 Fun Ways Teachers Can Use a Random Wheel in the Classroom</h3>
+          <p>Ideas for student pickers, question selectors, group assignments, rewards, etc. Include classroom-specific presets.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+      <!-- 3. Dinner Decisions -->
+      <article class="blog-card">
+        <div class="blog-card-img">🍕</div>
+        <div class="blog-card-body">
+          <h3>Spin the Wheel for Dinner Decisions: End “What’s for Dinner?” Forever</h3>
+          <p>Food picker ideas, bulk importing recipes/restaurants, family-friendly tips, and using themes for fun.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+      <!-- 4. Yes/No -->
+      <article class="blog-card">
+        <div class="blog-card-img">✅</div>
+        <div class="blog-card-body">
+          <h3>Yes/No Decision Wheel: Let Fate Decide Your Daily Dilemmas</h3>
+          <p>Explore decision-making psychology, best practices for yes/no/maybe wheels, and user stories.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+      <!-- 5. Fair Giveaways -->
+      <article class="blog-card">
+        <div class="blog-card-img">🏆</div>
+        <div class="blog-card-body">
+          <h3>Best Practices for Running Fair Giveaways and Raffles with Online Wheels</h3>
+          <p>Tips on randomness, removing entries, history tracking, and why your tool is ideal for streamers/content creators.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+      <!-- 6. Truth or Dare / Party -->
+      <article class="blog-card">
+        <div class="blog-card-img">🎮</div>
+        <div class="blog-card-body">
+          <h3>Truth or Dare, Game Night, and Party Games: Spin Wheels for Maximum Fun</h3>
+          <p>Preset ideas, custom challenges, team-building variations, and mobile tips for parties.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+      <!-- 7. Productivity -->
+      <article class="blog-card">
+        <div class="blog-card-img">🧠</div>
+        <div class="blog-card-body">
+          <h3>Why Random Selection Tools Like Spin Wheels Boost Productivity and Reduce Decision Fatigue</h3>
+          <p>Productivity angle with to-do list randomizers, brainstorming topic pickers, and team task assignment.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+      <!-- 8. Themes & Visuals -->
+      <article class="blog-card">
+        <div class="blog-card-img">🎨</div>
+        <div class="blog-card-body">
+          <h3>Custom Themes and Visuals: How to Make Your Spin Wheel Stand Out</h3>
+          <p>Deep dive into neon, pastel, dark mode, etc., plus tips for branding/personalizing wheels.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+      <!-- 9. Number Wheels & Beyond -->
+      <article class="blog-card">
+        <div class="blog-card-img">🔢</div>
+        <div class="blog-card-body">
+          <h3>Number Wheels and Random Generators: Uses Beyond the Obvious</h3>
+          <p>Cover number ranges, color pickers, team choosers, and creative applications (e.g., fitness challenges, habit builders).</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+      <!-- 10. Beginner’s Guide -->
+      <article class="blog-card">
+        <div class="blog-card-img">🚀</div>
+        <div class="blog-card-body">
+          <h3>Beginner’s Guide to WheelGenerator: Tips, Tricks, and Hidden Features</h3>
+          <p>Onboarding-style post covering bulk import, history, sounds, sharing, mobile use, and FAQs to help new users.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <small>© 2026 WheelGenerator. All rights reserved.</small>
+      <div class="footer-links">
+        <a href="#">Home</a>
+        <a href="#">Blog</a>
+        <a href="#">Privacy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- minimal script for demo (just to keep things lively) -->
+  <script>
+    (function() {
+      // all blog cards have a "read more" link that shows an alert (demo)
+      const readMoreLinks = document.querySelectorAll('.read-more');
+      readMoreLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const cardTitle = this.closest('.blog-card').querySelector('h3')?.innerText || 'Blog post';
+          alert(`📖 "${cardTitle}" — full article would open here. (demo)`);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
