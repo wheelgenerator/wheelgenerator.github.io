@@ -1,6 +1,6 @@
-import SpinWheel from './wheel.js';
-import HeaderComponent from './header.js';
-import FooterComponent from './footer.js';
+import SpinWheel from '/wheel.js';
+import HeaderComponent from '/header.js';
+import FooterComponent from '/footer.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   HeaderComponent.render();
