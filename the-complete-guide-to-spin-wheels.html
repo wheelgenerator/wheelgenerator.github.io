@@ -265,7 +265,7 @@
     </header>
 
     <div class="featured-image-wrap">
-      <img src="../images/pillar-spin-wheels-guide.svg" alt="Illustration of a colorful spin wheel divided into slices representing giveaways, classrooms, food, decisions, games, and numbers" width="1200" height="630" loading="eager">
+      <img src="/images/pillar-spin-wheels-guide.svg" alt="Illustration of a colorful spin wheel divided into slices representing giveaways, classrooms, food, decisions, games, and numbers" width="1200" height="630" loading="eager">
       <p class="featured-caption">One wheel, endless uses — giveaways, classrooms, food, decisions, games, and more.</p>
     </div>
 
@@ -472,21 +472,31 @@
   </div>
 </main>
 
-<div id="footer-root"></div>
+<!-- footer -->
+   <div id="footer-root"></div>  
 
-<script src="/header.js"></script>
-<script src="/footer.js"></script>
-<script src="app.js"></script>
-<script>
+  <script src="/header.js"></script>
+  <script src="/footer.js"></script>  
+
+  <script type="module">
+  import HeaderComponent from '/header.js';
+  import FooterComponent from '/footer.js';
+  
+  // Render header and footer
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.faq-question').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const item = btn.closest('.faq-item');
-        item.classList.toggle('active');
-        btn.querySelector('.faq-icon').textContent = item.classList.contains('active') ? '−' : '+';
-      });
-    });
+    HeaderComponent.render();
+    FooterComponent.render();
   });
 </script>
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-question')?.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+  </script>
 </body>
 </html>
