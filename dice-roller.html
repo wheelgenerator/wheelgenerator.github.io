@@ -446,6 +446,17 @@ ul{list-style:none;}
   <script src="/header.js" type="module"></script>
   <script src="/footer.js" type="module"></script>  
 
+  <script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-question')?.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+  </script>
+
   <script type="module">
   import HeaderComponent from '/header.js';
   import FooterComponent from '/footer.js';
@@ -464,14 +475,7 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 
 // FAQ
 
-  // FAQ accordion
-  document.querySelectorAll('.faq-item').forEach(item => {
-    item.querySelector('.faq-question')?.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
-    });
-  });
+ 
  
 
 // AOS
