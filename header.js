@@ -17,10 +17,10 @@ const HeaderComponent = {
             <li class="has-dropdown">
               <a href="/#wheel-types" class="nav-link">Wheel Types <span class="arrow">▾</span></a>
               <ul class="dropdown">
-                <li><a href="/#wheel-types">Random Picker</a></li>
-                <li><a href="/#wheel-types">Yes/No Wheel</a></li>
-                <li><a href="/#wheel-types">Number Wheel</a></li>
-                <li><a href="/#wheel-types">Color Wheel</a></li>
+                <li><a href="/random-number-generator">Random Number</a></li>
+                <li><a href="/coin-flip">Coin Flip</a></li>
+                <li><a href="/decision-maker">Decision Maker</a></li>
+                <li><a href="/dice-roller">Dice-roller</a></li>
                 <li><a href="/#wheel-types">Custom Wheel</a></li>
               </ul>
             </li>
