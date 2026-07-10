@@ -20,8 +20,7 @@ const HeaderComponent = {
                 <li><a href="/random-number-generator">Random Number</a></li>
                 <li><a href="/coin-flip">Coin Flip</a></li>
                 <li><a href="/decision-maker">Decision Maker</a></li>
-                <li><a href="/dice-roller">Dice-roller</a></li>
-                <li><a href="/#wheel-types">Custom Wheel</a></li>
+                <li><a href="/dice-roller">Dice-roller</a></li>                
               </ul>
             </li>
             <li><a href="/#features" class="nav-link">Features</a></li>
