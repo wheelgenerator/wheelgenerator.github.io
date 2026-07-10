@@ -302,7 +302,16 @@
   <script src="/footer.js"></script>
   <script src="/app.js"></script>
 
-  <!-- minimal script for demo (just to keep things lively) -->
+  <script type="module">
+  import HeaderComponent from '/header.js';
+  import FooterComponent from '/footer.js';
+  
+  // Render header and footer
+  document.addEventListener('DOMContentLoaded', () => {
+    HeaderComponent.render();
+    FooterComponent.render();
+  });
+</script>
   
 </body>
 </html>
