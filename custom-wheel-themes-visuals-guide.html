@@ -244,5 +244,17 @@
     FooterComponent.render();
   });
 </script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.faq-question').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        item.classList.toggle('active');
+        btn.querySelector('.faq-icon').textContent = item.classList.contains('active') ? '−' : '+';
+      });
+    });
+  });
+</script>
 </body>
 </html>
