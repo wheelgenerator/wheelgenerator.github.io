@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Fullscreen
   document.getElementById('fullscreenBtn')?.addEventListener('click', () => {
-    const el = document.getElementById('wheelSection');
-    if (!document.fullscreenElement) el.requestFullscreen?.();
+    const el = document.getElementById('wheel-app');
+    if (!document.fullscreenElement) el?.requestFullscreen?.();
     else document.exitFullscreen?.();
   });
 
@@ -93,8 +93,25 @@ document.addEventListener('DOMContentLoaded', () => {
     return colors[i % colors.length];
   }
 
+  // FIX: Theme colors mapping
+  function getThemeColors(theme) {
+    const themes = {
+      classic: ['#FF6B6B', '#4ECDC4', '#FFE66D', '#45B7D1', '#96CEB4', '#FF9A76', '#A29BFE', '#FD79A8', '#6C5CE7', '#00B894'],
+      neon: ['#FF0080', '#00FF41', '#0080FF', '#FF00FF', '#00FFFF', '#FFFF00', '#FF4400', '#00FF80'],
+      pastel: ['#FFB3BA', '#BAFFC9', '#BAE1FF', '#FFD1DC', '#E8D5B7', '#D4F0C0', '#F7DC6F', '#D7BDE2'],
+      dark: ['#2D3436', '#636E72', '#74B9FF', '#FD79A8', '#00B894', '#FDCB6E', '#E17055', '#6C5CE7'],
+      rainbow: ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#8B00FF'],
+      earth: ['#8B4513', '#A0522D', '#DEB887', '#CD853F', '#D2B48C', '#F5DEB3', '#8FBC8F', '#556B2F']
+    };
+    return themes[theme] || themes.classic;
+  }
+
   function syncWheel() {
-    const segs = entries.filter(e => e.trim()).map((text, i) => ({ text, color: getColor(i) }));
+    const themeColors = getThemeColors(currentTheme);
+    const segs = entries.filter(e => e.trim()).map((text, i) => ({ 
+      text, 
+      color: themeColors[i % themeColors.length] 
+    }));
     wheel.setSegments(segs);
     updateEntriesUI();
   }
@@ -147,13 +164,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('bulkModal').classList.remove('open');
   });
 
-  // Theme selector
+  // FIX: Theme selector - Improved
   document.querySelectorAll('.theme-btn').forEach(btn => {
     btn.addEventListener('click', function() {
+      // Update active state
       document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
-      wheel.theme = this.dataset.theme;
-      wheel.segments = wheel.segments.map((s, i) => ({ ...s, color: undefined }));
+      
+      // Set current theme
+      currentTheme = this.dataset.theme;
+      
+      // Update wheel theme
+      wheel.theme = currentTheme;
+      
+      // Sync wheel with new theme colors
       syncWheel();
     });
   });
