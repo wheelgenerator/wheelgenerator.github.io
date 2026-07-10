@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8148292690390336"
+     crossorigin="anonymous"></script>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VBZ3RM362W"></script>
 <script>
@@ -321,8 +323,8 @@
 
 <div id="footer-root"></div>  
 
-  <script src="header.js"></script>
-  <script src="footer.js"></script>  
+  <script src="/header.js"></script>
+  <script src="/footer.js"></script>  
 <script>
 (function(){
   // Presets
@@ -494,6 +496,22 @@
 
   renderOptions();
 })();
+</script>
+  <!-- footer -->
+   <div id="footer-root"></div>  
+
+  <script src="/header.js"></script>
+  <script src="/footer.js"></script>  
+
+  <script type="module">
+  import HeaderComponent from '/header.js';
+  import FooterComponent from '/footer.js';
+  
+  // Render header and footer
+  document.addEventListener('DOMContentLoaded', () => {
+    HeaderComponent.render();
+    FooterComponent.render();
+  });
 </script>
 </body>
 </html>
