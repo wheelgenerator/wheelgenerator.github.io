@@ -16,25 +16,16 @@ const FooterComponent = {
         </div>
         <div class="footer-links">
           <div class="footer-col">
-            <h4>Spin Wheels</h4>
+            <h4>More Fun</h4>
             <ul>
-              <li><a href="/#wheel-app">Random Wheel Spinner</a></li>
-              <li><a href="/#wheel-types">Yes or No Wheel</a></li>
-              <li><a href="/#wheel-types">Number Wheel</a></li>
-              <li><a href="/#wheel-types">Color Picker Wheel</a></li>
-              <li><a href="/#wheel-types">Spin The Wheel Custom</a></li>
+              <li><a href="/random-number-generator">Random Number</a></li>
+                <li><a href="/coin-flip">Coin Flip</a></li>
+                <li><a href="/decision-maker">Decision Maker</a></li>
+                <li><a href="/dice-roller">Dice-roller</a></li>
+                <li><a href="/#wheel-types">Custom Wheel</a></li>
             </ul>
           </div>
-          <div class="footer-col">
-            <h4>Features</h4>
-            <ul>
-              <li><a href="/#features">Free Spin Wheel</a></li>
-              <li><a href="/#features">Custom Wheel Builder</a></li>
-              <li><a href="/#features">Save & Share</a></li>
-              <li><a href="/#features">Multiple Themes</a></li>
-              <li><a href="/#features">Wheel Generator</a></li>
-            </ul>
-          </div>
+          
           <div class="footer-col">
             <h4>Use Cases</h4>
             <ul>
