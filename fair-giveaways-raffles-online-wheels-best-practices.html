@@ -233,8 +233,7 @@
    <div id="footer-root"></div>  
 
   <script src="/header.js"></script>
-  <script src="/footer.js"></script>
-  <script src="/app.js"></script>
+  <script src="/footer.js"></script>  
 
   <script type="module">
   import HeaderComponent from '/header.js';
@@ -246,17 +245,15 @@
     FooterComponent.render();
   });
 </script>
-
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.faq-question').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const item = btn.closest('.faq-item');
-        item.classList.toggle('active');
-        btn.querySelector('.faq-icon').textContent = item.classList.contains('active') ? '−' : '+';
-      });
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-question')?.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
     });
   });
-</script>
+  </script>
 </body>
 </html>
