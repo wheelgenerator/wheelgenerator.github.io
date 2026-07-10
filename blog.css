@@ -1,3 +1,8 @@
+/* At the top of blog.css, after the existing styles */
+main {
+  padding-top: 84px; /* nav height (64px) + some extra spacing */
+}
+
 /* Shared pillar/blog article styles for wheelgenerator.github.io/blog/ */
 /* ── Pillar article-specific styles (scoped, complements style.css) ── */
     .breadcrumb-nav { font-size: 0.85rem; color: var(--text3); padding: 18px 0 0; }
