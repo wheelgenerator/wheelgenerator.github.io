@@ -653,7 +653,3 @@ ul { list-style: none; }
     margin-top: 4px;
   }
 }
-/* Add to style (36).css */
-main {
-  padding-top: calc(var(--nav-h) + 20px);
-}
