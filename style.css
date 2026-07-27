@@ -1604,7 +1604,16 @@ ul {
   }
 
   /* FIX: Mobile dropdown positioning */
-  .has-dropdown:hover .dropdown {
+  /* ── Fixes for header ───────────────────────────────────────── */
+
+/* Prevent body scroll when mobile menu is open */
+body.menu-open {
+  overflow: hidden;
+}
+
+/* Mobile dropdown improvements */
+@media (max-width: 700px) {
+  .has-dropdown .dropdown {
     position: relative;
     top: 0;
     left: 0;
@@ -1619,6 +1628,59 @@ ul {
     background: transparent;
     padding-left: 12px;
     margin-top: 4px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0;
+  }
+
+  .has-dropdown .dropdown.open {
+    max-height: 500px;
+    padding: 8px 0 8px 12px;
+  }
+
+  .has-dropdown .dropdown li a {
+    padding: 8px 12px;
+  }
+
+  /* Ensure dropdown arrow rotates on mobile */
+  .has-dropdown > a .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+
+  .has-dropdown > a[aria-expanded="true"] .arrow {
+    transform: rotate(180deg);
+  }
+}
+
+/* Header performance fix */
+.site-header {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Ensure nav links are properly hidden on mobile */
+@media (max-width: 700px) {
+  .nav-links {
+    display: none !important;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--surface);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    z-index: 999;
+    gap: 4px;
+    overflow-y: auto;
+  }
+  
+  .nav-links.open {
+    display: flex !important;
   }
 }
 
