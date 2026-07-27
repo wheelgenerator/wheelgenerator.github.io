@@ -244,7 +244,7 @@ ul {
 
 /* ── Hero Section ───────────────────────────────────────────── */
 .hero {
-  padding: 72px 24px 56px;
+  padding: 40px 24px 30px;
   background: linear-gradient(135deg, #FFF8F5 0%, #F0F4FF 50%, #F5FFF8 100%);
   text-align: center; 
   position: relative; 
@@ -1665,7 +1665,7 @@ body.menu-open {
   }
   
   .hero { 
-    padding: 48px 16px 40px; 
+    padding: 24px 16px 16px;
   }
   
   .footer-links { 
