@@ -9,7 +9,7 @@ const FooterComponent = {
             <span class="logo-icon">🎡</span>
             <span>Spin The Wheel</span>
           </a>
-          <p class="footer-tagline">Make every decision fun with a spin! The best free spin wheel random picker tool online.</p>
+          <p class="footer-tagline">Make every decision fun with a spin! The best spin wheel random picker tool online.</p>
           <div class="footer-social">
             
           </div>
