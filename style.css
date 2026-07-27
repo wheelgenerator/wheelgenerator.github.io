@@ -1561,19 +1561,32 @@ ul {
     position: fixed; 
     top: var(--nav-h); 
     left: 0; 
-    right: 0; 
-    bottom: 0; 
+    right: 0;
+    height: calc(100vh - var(--nav-h));
     background: var(--surface); 
     flex-direction: column; 
-    align-items: flex-start; 
-    padding: 24px; 
+    align-items: stretch;
+    padding: 16px 24px 24px;
     z-index: 999; 
-    gap: 4px; 
-    overflow-y: auto; 
+    gap: 2px; 
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   }
   
   .nav-links.open { 
     display: flex !important; 
+    animation: slideDown 0.3s ease;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   .nav-toggle { 
@@ -1584,21 +1597,19 @@ ul {
     display: none; 
   }
   
-  .hero-stats { 
-    gap: 24px; 
+  .nav-link {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 1rem;
   }
   
-  .themes-grid { 
-    grid-template-columns: repeat(2, 1fr); 
+  .nav-link:hover {
+    background: rgba(255,107,53,0.08);
   }
   
-  .footer-links { 
-    grid-template-columns: 1fr 1fr; 
-  }
-
   .has-dropdown {
     width: 100%;
-    position: relative;
   }
 
   .has-dropdown > a {
@@ -1606,7 +1617,12 @@ ul {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 10px 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+  }
+  
+  .has-dropdown > a:hover {
+    background: rgba(255,107,53,0.08);
   }
 
   .has-dropdown .dropdown {
@@ -1623,32 +1639,22 @@ ul {
     min-width: 100% !important;
     background: transparent !important;
     padding: 0 !important;
-    margin-top: 4px !important;
+    margin: 4px 0 4px 12px !important;
     max-height: 0 !important;
-    overflow: visible !important; /* Changed from hidden to visible */
+    overflow: hidden !important;
+    transition: max-height 0.4s ease !important;
     display: block !important;
-    transition: max-height 0.3s ease, padding 0.3s ease !important;
   }
 
-  /* When dropdown is open - show all items without scrollbar */
   .has-dropdown .dropdown.open {
-    max-height: none !important; /* Remove max-height limitation */
-    padding: 8px 0 8px 12px !important;
-    overflow: visible !important;
-  }
-
-  /* Ensure dropdown items are visible and clickable */
-  .has-dropdown .dropdown li {
-    display: block !important;
-    width: 100% !important;
-    opacity: 1 !important;
+    max-height: 800px !important;
+    padding: 4px 0 4px 12px !important;
+    overflow-y: auto !important;
   }
 
   .has-dropdown .dropdown li a {
-    display: block !important;
-    padding: 10px 12px !important;
+    padding: 10px 16px !important;
     font-size: 0.9rem !important;
-    width: 100% !important;
   }
 
   .has-dropdown > a[aria-expanded="true"] .arrow {
@@ -1661,44 +1667,21 @@ ul {
     transform: none !important;
   }
 
-  .nav-link {
-    width: 100%;
-    padding: 10px 12px;
+  .hero-stats { 
+    gap: 24px; 
+  }
+  
+  .themes-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+  }
+  
+  .footer-links { 
+    grid-template-columns: 1fr 1fr; 
   }
 }
 
 body.menu-open {
   overflow: hidden !important;
-}
-
-@media (max-width: 480px) {
-  .section { 
-    padding: 56px 16px; 
-  }
-  
-  .hero { 
-    padding: 24px 16px 16px;
-  }
-  
-  .footer-links { 
-    grid-template-columns: 1fr; 
-  }
-  
-  #wheel-app { 
-    padding: 48px 16px; 
-  }
-
-  .wheel-stage {
-    min-height: 400px;
-  }
-  
-  .wheel-canvas-wrap {
-    max-width: 350px;
-  }
-
-  .has-dropdown .dropdown.open {
-    max-height: 600px !important;
-  }
 }
 
 /* FIX: Prevent layout shifts from font loading */
