@@ -47,14 +47,12 @@ body {
   color: var(--text);
   line-height: 1.7;
   overflow-x: hidden;
-  /* FIX: Reserve space for fixed header to prevent CLS */
   padding-top: var(--nav-h);
 }
 
 img { 
   max-width: 100%; 
   display: block; 
-  /* FIX: Prevent layout shifts from images */
   height: auto;
 }
 
@@ -85,8 +83,10 @@ ul {
   backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
   transition: border-color .3s, box-shadow .3s;
-  /* FIX: Ensure header has fixed height */
   height: var(--nav-h);
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .site-header.scrolled {
@@ -147,6 +147,13 @@ ul {
 
 .has-dropdown { 
   position: relative; 
+}
+
+.has-dropdown > a .arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  margin-left: 4px;
+  font-size: 0.7rem;
 }
 
 .has-dropdown:hover .dropdown { 
@@ -237,7 +244,6 @@ ul {
 
 /* ── Hero Section ───────────────────────────────────────────── */
 .hero {
-  /* FIX: Remove margin-top since body has padding-top now */
   padding: 72px 24px 56px;
   background: linear-gradient(135deg, #FFF8F5 0%, #F0F4FF 50%, #F5FFF8 100%);
   text-align: center; 
@@ -421,41 +427,34 @@ ul {
   margin: 0 auto;
 }
 
-/* FIX: Prevent CLS from canvas */
 .wheel-stage {
   background: var(--surface);
   border-radius: 24px;
   padding: 32px;
   box-shadow: var(--shadow);
   position: relative;
-  /* Reserve space to prevent layout shift */
   min-height: 550px;
 }
 
-/* FIX: Canvas container with aspect ratio */
 .wheel-canvas-wrap {
   position: relative;
   display: flex;
   justify-content: center;
-  /* Maintain consistent dimensions */
   aspect-ratio: 1/1;
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
 }
 
-/* FIX: Canvas sizing */
 .wheel-canvas-wrap canvas {
   width: 100%;
   height: 100%;
   display: block;
   border-radius: 50%;
-  /* Ensure canvas maintains its dimensions */
   max-width: 500px;
   max-height: 500px;
 }
 
-/* FIX: Result box with fixed dimensions */
 .result-box {
   position: absolute;
   bottom: -10px;
@@ -473,7 +472,6 @@ ul {
   pointer-events: none;
   transition: all .4s cubic-bezier(.175,.885,.32,1.275);
   z-index: 10;
-  /* FIX: Prevent layout shift */
   min-height: 60px;
   min-width: 200px;
   display: flex;
@@ -595,7 +593,6 @@ ul {
   color: var(--primary); 
 }
 
-/* FIX: Panel bodies - prevent focusable elements when hidden */
 .panel-body { 
   padding: 20px; 
   display: none; 
@@ -605,7 +602,6 @@ ul {
   display: block; 
 }
 
-/* FIX: When panel is inactive, prevent interaction */
 .panel-body:not(.active) {
   display: none !important;
 }
@@ -918,7 +914,6 @@ ul {
   height: 40px;
 }
 
-/* FIX: Ensure preset images don't cause layout shift */
 .preset-btn img {
   width: 100%;
   height: 100%;
@@ -1072,7 +1067,6 @@ ul {
   color: var(--text2); 
 }
 
-/* FIX: Feature images */
 .feature-card img {
   width: 48px;
   height: 48px;
@@ -1532,7 +1526,6 @@ ul {
   transition-delay: 0.3s; 
 }
 
-/* FIX: Prevent focus on hidden elements */
 [aria-hidden="true"] {
   pointer-events: none !important;
   user-select: none !important;
@@ -1543,7 +1536,6 @@ ul {
   user-select: none !important;
 }
 
-/* ── Responsive ─────────────────────────────────────────────── */
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .wheel-app-grid { 
@@ -1564,7 +1556,6 @@ ul {
 }
 
 @media (max-width: 700px) {
-  /* Mobile Navigation */
   .nav-links { 
     display: none !important;
     position: fixed; 
@@ -1605,7 +1596,17 @@ ul {
     grid-template-columns: 1fr 1fr; 
   }
 
-  /* ── Mobile Dropdown Fix ────────────────────────────────── */
+  .has-dropdown {
+    width: 100%;
+  }
+
+  .has-dropdown > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
   .has-dropdown .dropdown {
     position: relative !important;
     top: 0 !important;
@@ -1628,7 +1629,7 @@ ul {
   }
 
   .has-dropdown .dropdown.open {
-    max-height: 800px !important; /* Increased height */
+    max-height: 800px !important;
     padding: 8px 0 8px 12px !important;
     overflow-y: auto !important;
   }
@@ -1638,35 +1639,24 @@ ul {
     font-size: 0.9rem !important;
   }
 
-  /* Dropdown arrow rotation */
-  .has-dropdown > a .arrow {
-    display: inline-block !important;
-    transition: transform 0.3s ease !important;
-    margin-left: 4px;
-  }
-
   .has-dropdown > a[aria-expanded="true"] .arrow {
     transform: rotate(180deg) !important;
   }
 
-  /* Remove hover effects on mobile */
   .has-dropdown:hover .dropdown {
     opacity: 1 !important;
     pointer-events: auto !important;
     transform: none !important;
   }
+
+  .nav-link {
+    width: 100%;
+    padding: 10px 12px;
+  }
 }
 
-/* Prevent body scroll when mobile menu is open */
 body.menu-open {
   overflow: hidden !important;
-}
-
-/* Header performance fix */
-.site-header {
-  will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 
 @media (max-width: 480px) {
@@ -1694,7 +1684,6 @@ body.menu-open {
     max-width: 350px;
   }
 
-  /* Smaller dropdown on very small screens */
   .has-dropdown .dropdown.open {
     max-height: 600px !important;
   }
