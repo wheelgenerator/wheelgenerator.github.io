@@ -1635,7 +1635,7 @@ body.menu-open {
   }
 
   .has-dropdown .dropdown.open {
-    max-height: auto;
+    max-height: none;
     padding: 8px 0 8px 12px;
   }
 
