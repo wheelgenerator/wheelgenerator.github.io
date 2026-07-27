@@ -1606,6 +1606,7 @@ ul {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 10px 12px;
   }
 
   .has-dropdown .dropdown {
@@ -1624,22 +1625,23 @@ ul {
     padding: 0 !important;
     margin-top: 4px !important;
     max-height: 0 !important;
-    overflow: hidden !important;
-    transition: max-height 0.3s ease !important;
+    overflow: visible !important; /* Changed from hidden to visible */
     display: block !important;
+    transition: max-height 0.3s ease, padding 0.3s ease !important;
   }
 
-  /* Fix: When dropdown is open, show all items without scrollbar */
+  /* When dropdown is open - show all items without scrollbar */
   .has-dropdown .dropdown.open {
-    max-height: 400px !important;
-    overflow-y: visible !important;
+    max-height: none !important; /* Remove max-height limitation */
     padding: 8px 0 8px 12px !important;
+    overflow: visible !important;
   }
 
-  /* Fix: Ensure dropdown items are visible */
+  /* Ensure dropdown items are visible and clickable */
   .has-dropdown .dropdown li {
     display: block !important;
     width: 100% !important;
+    opacity: 1 !important;
   }
 
   .has-dropdown .dropdown li a {
