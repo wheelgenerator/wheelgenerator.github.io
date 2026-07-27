@@ -1544,6 +1544,7 @@ ul {
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */
+/* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .wheel-app-grid { 
     grid-template-columns: 1fr; 
@@ -1563,8 +1564,9 @@ ul {
 }
 
 @media (max-width: 700px) {
+  /* Mobile Navigation */
   .nav-links { 
-    display: none; 
+    display: none !important;
     position: fixed; 
     top: var(--nav-h); 
     left: 0; 
@@ -1580,7 +1582,7 @@ ul {
   }
   
   .nav-links.open { 
-    display: flex; 
+    display: flex !important; 
   }
   
   .nav-toggle { 
@@ -1603,55 +1605,61 @@ ul {
     grid-template-columns: 1fr 1fr; 
   }
 
-  /* FIX: Mobile dropdown positioning */
-  /* ── Fixes for header ───────────────────────────────────────── */
-
-/* Prevent body scroll when mobile menu is open */
-body.menu-open {
-  overflow: hidden;
-}
-
-/* Mobile dropdown improvements */
-@media (max-width: 700px) {
+  /* ── Mobile Dropdown Fix ────────────────────────────────── */
   .has-dropdown .dropdown {
-    position: relative;
-    top: 0;
-    left: 0;
-    opacity: 1;
-    pointer-events: auto;
-    transform: none;
-    box-shadow: none;
-    border: none;
-    border-left: 2px solid var(--primary);
-    border-radius: 0;
-    min-width: 100%;
-    background: transparent;
-    padding-left: 12px;
-    margin-top: 4px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    padding: 0;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-left: 3px solid var(--primary) !important;
+    border-radius: 0 !important;
+    min-width: 100% !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin-top: 4px !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.4s ease, padding 0.3s ease !important;
+    display: block !important;
   }
 
   .has-dropdown .dropdown.open {
-    max-height: none;
-    padding: 8px 0 8px 12px;
+    max-height: 800px !important; /* Increased height */
+    padding: 8px 0 8px 12px !important;
+    overflow-y: auto !important;
   }
 
   .has-dropdown .dropdown li a {
-    padding: 8px 12px;
+    padding: 10px 12px !important;
+    font-size: 0.9rem !important;
   }
 
-  /* Ensure dropdown arrow rotates on mobile */
+  /* Dropdown arrow rotation */
   .has-dropdown > a .arrow {
-    display: inline-block;
-    transition: transform 0.3s ease;
+    display: inline-block !important;
+    transition: transform 0.3s ease !important;
+    margin-left: 4px;
   }
 
   .has-dropdown > a[aria-expanded="true"] .arrow {
-    transform: rotate(180deg);
+    transform: rotate(180deg) !important;
   }
+
+  /* Remove hover effects on mobile */
+  .has-dropdown:hover .dropdown {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.menu-open {
+  overflow: hidden !important;
 }
 
 /* Header performance fix */
@@ -1659,29 +1667,6 @@ body.menu-open {
   will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
-}
-
-/* Ensure nav links are properly hidden on mobile */
-@media (max-width: 700px) {
-  .nav-links {
-    display: none !important;
-    position: fixed;
-    top: var(--nav-h);
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--surface);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 24px;
-    z-index: 999;
-    gap: 4px;
-    overflow-y: auto;
-  }
-  
-  .nav-links.open {
-    display: flex !important;
-  }
 }
 
 @media (max-width: 480px) {
@@ -1701,13 +1686,17 @@ body.menu-open {
     padding: 48px 16px; 
   }
 
-  /* FIX: Smaller canvas on mobile */
   .wheel-stage {
     min-height: 400px;
   }
   
   .wheel-canvas-wrap {
     max-width: 350px;
+  }
+
+  /* Smaller dropdown on very small screens */
+  .has-dropdown .dropdown.open {
+    max-height: 600px !important;
   }
 }
 
