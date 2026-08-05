@@ -242,56 +242,135 @@ ul {
   transform: translateY(-7px) rotate(-45deg); 
 }
 
-/* ── Hero Section ───────────────────────────────────────────── */
-/* ── Compressed Hero ─────────────────────────────────────────── */
+/* ── Hero Section (Compact + Centered) ────────────────────── */
 .hero {
-  padding: 16px 24px 12px;           /* was 40px 24px 30px */
+  padding: 20px 24px 16px;
   background: linear-gradient(135deg, #FFF8F5 0%, #F0F4FF 50%, #F5FFF8 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(255,107,53,0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(162,155,254,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .hero-badge {
-  font-size: 0.7rem;                /* was 0.8rem */
-  padding: 4px 12px;                /* was 6px 14px */
-  margin-bottom: 10px;              /* was 20px */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,107,53,0.1);
+  color: var(--primary);
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255,107,53,0.2);
 }
 
 .hero h1 {
-  font-size: clamp(1.6rem, 3.5vw, 2.6rem);  /* was clamp(2.2rem, 5vw, 3.6rem) */
-  margin-bottom: 8px;               /* was 16px */
-  line-height: 1.2;                 /* was 1.15 */
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.hero h1 span {
+  color: var(--primary);
 }
 
 .hero-sub {
-  font-size: 0.9rem;                /* was 1.1rem */
-  margin-bottom: 16px;              /* was 32px */
-  max-width: 460px;                 /* was 520px */
+  font-size: 0.9rem;
+  color: var(--text2);
+  margin-bottom: 16px;
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-actions {
-  gap: 8px;                         /* was 12px */
-}
-
-.btn-primary,
-.btn-secondary {
-  padding: 10px 22px;               /* was 14px 32px / 14px 28px */
-  font-size: 0.85rem;               /* was 1rem */
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .btn-primary {
-  box-shadow: 0 4px 16px rgba(255,107,53,0.35);  /* was 0 6px 24px */
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 16px rgba(255,107,53,0.35);
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255,107,53,0.45);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: 2px solid var(--border);
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
 }
 
 .hero-stats {
-  margin-top: 16px;                 /* was 40px */
-  gap: 24px;                        /* was 40px */
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
 }
 
 .stat-num {
-  font-size: 1.3rem;                /* was 1.8rem */
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
 }
 
 .stat-label {
-  font-size: 0.65rem;               /* was 0.8rem */
+  font-size: 0.65rem;
+  color: var(--text3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 /* ── Section Wrapper ────────────────────────────────────────── */
@@ -1589,8 +1668,46 @@ ul {
     transform: none !important;
   }
 
-  .hero-stats { 
-    gap: 24px; 
+  .hero {
+    padding: 12px 16px 12px;
+  }
+
+  .hero h1 {
+    font-size: 1.4rem;
+  }
+
+  .hero-sub {
+    font-size: 0.8rem;
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    gap: 6px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 8px 16px;
+    font-size: 0.75rem;
+  }
+
+  .hero-stats {
+    gap: 16px;
+    margin-top: 12px;
+  }
+
+  .stat-num {
+    font-size: 1.1rem;
+  }
+
+  .stat-label {
+    font-size: 0.55rem;
+  }
+
+  .hero-badge {
+    font-size: 0.6rem;
+    padding: 3px 10px;
+    margin-bottom: 6px;
   }
   
   .themes-grid { 
