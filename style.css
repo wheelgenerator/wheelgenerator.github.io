@@ -243,133 +243,55 @@ ul {
 }
 
 /* ── Hero Section ───────────────────────────────────────────── */
+/* ── Compressed Hero ─────────────────────────────────────────── */
 .hero {
-  padding: 40px 24px 30px;
+  padding: 16px 24px 12px;           /* was 40px 24px 30px */
   background: linear-gradient(135deg, #FFF8F5 0%, #F0F4FF 50%, #F5FFF8 100%);
-  text-align: center; 
-  position: relative; 
-  overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute; 
-  inset: 0;
-  background: radial-gradient(ellipse at 20% 50%, rgba(255,107,53,0.06) 0%, transparent 60%),
-              radial-gradient(ellipse at 80% 20%, rgba(162,155,254,0.08) 0%, transparent 60%);
-}
-
-.hero-content { 
-  position: relative; 
-  max-width: 700px; 
-  margin: 0 auto; 
 }
 
 .hero-badge {
-  display: inline-flex; 
-  align-items: center; 
-  gap: 6px;
-  background: rgba(255,107,53,0.1); 
-  color: var(--primary);
-  padding: 6px 14px; 
-  border-radius: 50px; 
-  font-size: 0.8rem; 
-  font-weight: 700;
-  margin-bottom: 20px; 
-  border: 1px solid rgba(255,107,53,0.2);
+  font-size: 0.7rem;                /* was 0.8rem */
+  padding: 4px 12px;                /* was 6px 14px */
+  margin-bottom: 10px;              /* was 20px */
 }
 
 .hero h1 {
-  font-family: var(--font-display); 
-  font-size: clamp(2.2rem, 5vw, 3.6rem);
-  font-weight: 700; 
-  line-height: 1.15; 
-  margin-bottom: 16px;
-  color: var(--text);
-}
-
-.hero h1 span { 
-  color: var(--primary); 
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);  /* was clamp(2.2rem, 5vw, 3.6rem) */
+  margin-bottom: 8px;               /* was 16px */
+  line-height: 1.2;                 /* was 1.15 */
 }
 
 .hero-sub {
-  font-size: 1.1rem; 
-  color: var(--text2); 
-  margin-bottom: 32px; 
-  max-width: 520px; 
-  margin-left: auto; 
-  margin-right: auto;
+  font-size: 0.9rem;                /* was 1.1rem */
+  margin-bottom: 16px;              /* was 32px */
+  max-width: 460px;                 /* was 520px */
 }
 
-.hero-actions { 
-  display: flex; 
-  gap: 12px; 
-  justify-content: center; 
-  flex-wrap: wrap; 
+.hero-actions {
+  gap: 8px;                         /* was 12px */
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 10px 22px;               /* was 14px 32px / 14px 28px */
+  font-size: 0.85rem;               /* was 1rem */
 }
 
 .btn-primary {
-  background: var(--primary); 
-  color: #fff;
-  padding: 14px 32px; 
-  border-radius: 50px; 
-  font-weight: 800; 
-  font-size: 1rem;
-  box-shadow: 0 6px 24px rgba(255,107,53,0.4);
-  transition: all .2s; 
-  display: inline-flex; 
-  align-items: center; 
-  gap: 8px;
-}
-
-.btn-primary:hover { 
-  background: var(--primary-dark); 
-  transform: translateY(-2px); 
-  box-shadow: 0 10px 32px rgba(255,107,53,0.5); 
-}
-
-.btn-secondary {
-  background: var(--surface); 
-  color: var(--text);
-  padding: 14px 28px; 
-  border-radius: 50px; 
-  font-weight: 700; 
-  font-size: 1rem;
-  border: 2px solid var(--border); 
-  transition: all .2s;
-}
-
-.btn-secondary:hover { 
-  border-color: var(--primary); 
-  color: var(--primary); 
-  transform: translateY(-2px); 
+  box-shadow: 0 4px 16px rgba(255,107,53,0.35);  /* was 0 6px 24px */
 }
 
 .hero-stats {
-  display: flex; 
-  gap: 40px; 
-  justify-content: center; 
-  margin-top: 40px; 
-  flex-wrap: wrap;
+  margin-top: 16px;                 /* was 40px */
+  gap: 24px;                        /* was 40px */
 }
 
-.stat { 
-  text-align: center; 
+.stat-num {
+  font-size: 1.3rem;                /* was 1.8rem */
 }
 
-.stat-num { 
-  font-family: var(--font-display); 
-  font-size: 1.8rem; 
-  font-weight: 700; 
-  color: var(--primary); 
-}
-
-.stat-label { 
-  font-size: 0.8rem; 
-  color: var(--text3); 
-  font-weight: 600; 
-  text-transform: uppercase; 
-  letter-spacing: 0.05em; 
+.stat-label {
+  font-size: 0.65rem;               /* was 0.8rem */
 }
 
 /* ── Section Wrapper ────────────────────────────────────────── */
@@ -415,7 +337,7 @@ ul {
 
 /* ── Wheel App Section ──────────────────────────────────────── */
 #wheel-app { 
-  padding: 60px 24px; 
+  padding: 20px 24px 60px;
 }
 
 .wheel-app-grid {
