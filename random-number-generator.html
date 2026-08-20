@@ -160,9 +160,28 @@
     .info-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:18px; margin-top:36px; }
     .ic { background:var(--srf); border:1.5px solid var(--bdr); border-radius:var(--r); padding:22px 18px; transition:all .25s; }
     .ic:hover { border-color:var(--pri); transform:translateY(-3px); box-shadow:var(--sh); }
-    .ic-icon { font-size:1.8rem; margin-bottom:8px; }
+    .ic-icon { width:42px; height:42px; border-radius:12px; background:var(--pri-lt); color:var(--pri); display:flex; align-items:center; justify-content:center; margin-bottom:10px; }
+    .ic-icon svg { width:22px; height:22px; }
     .ic h3 { font-family:var(--fd); font-size:.95rem; margin-bottom:5px; }
     .ic p { font-size:.82rem; color:var(--txt2); }
+
+    /* ── inline svg icon sizing ── */
+    .icon { flex-shrink:0; display:inline-block; vertical-align:-3px; }
+    .badge .icon { width:13px; height:13px; margin-right:1px; }
+    .preset-chip { display:inline-flex; align-items:center; gap:5px; }
+    .preset-chip .icon { width:13px; height:13px; }
+    .gen-btn { display:flex; align-items:center; justify-content:center; gap:8px; }
+    .gen-btn .icon { width:19px; height:19px; }
+    .act-btn { display:inline-flex; align-items:center; gap:5px; }
+    .act-btn .icon { width:14px; height:14px; }
+    .faq-icon svg { width:12px; height:12px; }
+    .step-card { display:flex; gap:16px; align-items:flex-start; }
+    .step-num-icon { width:44px; height:44px; border-radius:50%; background:var(--pri); color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:0 4px 14px rgba(108,92,231,.35); }
+    .step-num-icon svg { width:22px; height:22px; }
+    .step-list { display:grid; grid-template-columns:repeat(2,1fr); gap:28px 24px; margin-top:32px; }
+    .step-card h3 { font-family:var(--fd); font-size:.95rem; margin-bottom:4px; }
+    .step-card p { font-size:.83rem; color:var(--txt2); }
+    @media (max-width:700px) { .step-list { grid-template-columns:1fr; } }
 
     .faq-list { margin-top:32px; }
     .faq-item { border-bottom:1px solid var(--bdr); }
@@ -203,7 +222,10 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-in">
-      <div class="badge">🔢 Free Tool</div>
+      <div class="badge">
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 13.6 8.4 20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6Z"/></svg>
+        Free Tool
+      </div>
       <h1>Random <span>Number Generator</span></h1>
       <p>Generate random numbers in any range instantly. Single picks, bulk generation, unique sets, lottery numbers — all free, no signup needed.</p>
     </div>
@@ -222,8 +244,14 @@
             <button class="preset-chip active" data-min="1" data-max="100">1 – 100</button>
             <button class="preset-chip" data-min="1" data-max="1000">1 – 1,000</button>
             <button class="preset-chip" data-min="1" data-max="1000000">1 – 1M</button>
-            <button class="preset-chip" data-min="1" data-max="6">🎲 Dice (1–6)</button>
-            <button class="preset-chip" data-min="1" data-max="49" data-count="6" data-unique="true">🎰 Lottery (6/49)</button>
+            <button class="preset-chip" data-min="1" data-max="6">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="8" r="1.3" fill="currentColor" stroke="none"/><circle cx="16" cy="8" r="1.3" fill="currentColor" stroke="none"/><circle cx="8" cy="16" r="1.3" fill="currentColor" stroke="none"/><circle cx="16" cy="16" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg>
+              Dice (1–6)
+            </button>
+            <button class="preset-chip" data-min="1" data-max="49" data-count="6" data-unique="true">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z"/><line x1="13" y1="6.5" x2="13" y2="9" stroke-dasharray="1.5 1.5"/><line x1="13" y1="15" x2="13" y2="17.5" stroke-dasharray="1.5 1.5"/></svg>
+              Lottery (6/49)
+            </button>
           </div>
         </div>
 
@@ -258,7 +286,10 @@
         </div>
 
         <!-- Generate -->
-        <button class="gen-btn" id="genBtn">⚡ Generate Random Number</button>
+        <button class="gen-btn" id="genBtn">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
+          <span id="genBtnLabel">Generate Random Number</span>
+        </button>
 
         <!-- Result -->
         <div class="result-area" id="resultArea">
@@ -266,8 +297,14 @@
           <div class="result-numbers" id="resultNumbers" style="display:none;"></div>
           <div class="result-meta" id="resultMeta" style="display:none;"></div>
           <div class="result-actions" id="resultActions" style="display:none;">
-            <button class="act-btn" id="copyBtn">📋 Copy</button>
-            <button class="act-btn" id="genAgainBtn">🔄 Generate Again</button>
+            <button class="act-btn" id="copyBtn">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span id="copyBtnLabel">Copy</span>
+            </button>
+            <button class="act-btn" id="genAgainBtn">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14.5-4.5M20 12a8 8 0 0 1-14.5 4.5"/><path d="M18.5 3v4.5H14"/><path d="M5.5 21v-4.5H10"/></svg>
+              Generate Again
+            </button>
           </div>
         </div>
 
@@ -284,46 +321,80 @@
     </div>
   </div>
 
-  <!-- FEATURES -->
+  <!-- HOW IT WORKS -->
   <section class="section">
+    <div class="wrap-sm">
+      <div class="sec-label">How It Works</div>
+      <h2 class="sec-title">From Blank Screen to Random Number in Seconds</h2>
+      <p class="sec-desc">No configuration, no downloads. Just tell the tool what you need and click generate.</p>
+      <div class="step-list">
+        <div class="step-card aos">
+          <div class="step-num-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div>
+          <div><h3>Set your range</h3><p>Type any minimum and maximum into the two fields, or tap a quick preset like 1–100 or Dice (1–6) to skip the typing entirely.</p></div>
+        </div>
+        <div class="step-card aos">
+          <div class="step-num-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="9" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="15" y2="20"/></svg></div>
+          <div><h3>Choose how many</h3><p>Use the +/− stepper to decide if you need one number or up to a hundred, then toggle "No repeats" or "Sort results" if you need them.</p></div>
+        </div>
+        <div class="step-card aos">
+          <div class="step-num-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></div>
+          <div><h3>Generate instantly</h3><p>Hit the button and the tool draws numbers on the spot using the Web Crypto API — no server round-trip, no waiting.</p></div>
+        </div>
+        <div class="step-card aos">
+          <div class="step-num-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+          <div><h3>Copy or run again</h3><p>Copy the result with one tap, generate again for a fresh draw, or scroll down to your session history to compare past results.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section section-alt">
     <div class="wrap">
       <div class="sec-label">Features</div>
       <h2 class="sec-title">Everything You Need in a Number Generator</h2>
       <p class="sec-desc">Powerful options packed into a simple, free tool anyone can use.</p>
       <div class="info-grid">
-        <div class="ic aos"><div class="ic-icon">🎯</div><h3>Custom Range</h3><p>Set any minimum and maximum — negative numbers, decimals, millions. Any range works.</p></div>
-        <div class="ic aos"><div class="ic-icon">🔢</div><h3>Multiple Numbers</h3><p>Generate up to 100 numbers in one click. Great for games, draws, and data sampling.</p></div>
-        <div class="ic aos"><div class="ic-icon">🚫</div><h3>No Repeats Mode</h3><p>Enable unique mode to ensure no number appears twice in your result set.</p></div>
-        <div class="ic aos"><div class="ic-icon">🔐</div><h3>Truly Random</h3><p>Uses crypto.getRandomValues() — cryptographically secure, not predictable Math.random().</p></div>
-        <div class="ic aos"><div class="ic-icon">🎰</div><h3>Lottery Mode</h3><p>One-click lottery presets for 6/49, Powerball-style, and more.</p></div>
-        <div class="ic aos"><div class="ic-icon">📜</div><h3>History Log</h3><p>Every result is saved in your session history so you can refer back anytime.</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div><h3>Custom Range</h3><p>Set any minimum and maximum — negative numbers, tiny ranges, millions. Any range works.</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="9" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="15" y2="20"/></svg></div><h3>Multiple Numbers</h3><p>Generate up to 100 numbers in one click. Great for games, draws, and data sampling.</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><h3>No Repeats Mode</h3><p>Enable unique mode to ensure no number appears twice in your result set.</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3Z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Truly Random</h3><p>Uses crypto.getRandomValues() — cryptographically secure, not predictable Math.random().</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z"/><line x1="13" y1="6.5" x2="13" y2="9" stroke-dasharray="1.5 1.5"/><line x1="13" y1="15" x2="13" y2="17.5" stroke-dasharray="1.5 1.5"/></svg></div><h3>Lottery Mode</h3><p>One-click lottery presets for 6/49, Powerball-style, and more.</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg></div><h3>History Log</h3><p>Every result is saved in your session history so you can refer back anytime.</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="3"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="6" y1="13" x2="10" y2="13"/><line x1="6" y1="16" x2="8" y2="16"/></svg></div><h3>No Signup Needed</h3><p>Everything runs in your browser. No accounts, no email, no data collected — just open and go.</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="18" x2="15" y2="18"/></svg></div><h3>Works on Any Device</h3><p>Fully responsive layout that works the same on phones, tablets, and desktops.</p></div>
       </div>
     </div>
   </section>
 
   <!-- USE CASES -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="wrap-sm">
       <div class="sec-label">Use Cases</div>
       <h2 class="sec-title">When to Use a Random Number Generator</h2>
-      <p class="sec-desc">From games to giveaways, random numbers are useful in more situations than you think.</p>
+      <p class="sec-desc">From games to giveaways, random numbers are useful in far more situations than most people realize — anywhere a fair, unbiased pick is needed.</p>
       <div class="info-grid" style="margin-top:28px;">
-        <div class="ic aos"><div class="ic-icon">🎰</div><h3>Lottery & Giveaways</h3><p>Pick winning ticket numbers fairly with unique, unbiased random picks.</p></div>
-        <div class="ic aos"><div class="ic-icon">🎮</div><h3>Games & Tabletop</h3><p>Generate random events, stats, item drops, or starting positions for any game.</p></div>
-        <div class="ic aos"><div class="ic-icon">🏫</div><h3>Teaching & Research</h3><p>Create unbiased samples for statistics classes or randomized experiments.</p></div>
-        <div class="ic aos"><div class="ic-icon">🤔</div><h3>Make Decisions</h3><p>Assign numbers to choices and let the generator make the call for you.</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z"/><line x1="13" y1="6.5" x2="13" y2="9" stroke-dasharray="1.5 1.5"/><line x1="13" y1="15" x2="13" y2="17.5" stroke-dasharray="1.5 1.5"/></svg></div><h3>Lottery & Giveaways</h3><p>Pick winning ticket numbers fairly with unique, unbiased random picks — perfect for raffles, contests, and social media giveaways.</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="5"/><line x1="7" y1="12" x2="9" y2="12"/><line x1="8" y1="11" x2="8" y2="13"/><circle cx="16" cy="10.5" r="0.8" fill="currentColor" stroke="none"/><circle cx="18" cy="13" r="0.8" fill="currentColor" stroke="none"/></svg></div><h3>Games & Tabletop</h3><p>Generate random events, stats, item drops, or starting positions for board games, RPGs, and party games.</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9 12 4l10 5-10 5-10-5Z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg></div><h3>Teaching & Research</h3><p>Create unbiased samples for statistics classes, surveys, or randomized controlled experiments.</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.2.9-1.2 1.7"/><circle cx="12" cy="17" r="0.6" fill="currentColor" stroke="none"/></svg></div><h3>Make Decisions</h3><p>Assign numbers to choices — restaurants, movies, chores — and let the generator make the call for you.</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 20c0-3 2.5-5 6-5s6 2 6 5"/><path d="M12 20c0-3 2.2-5 5-5s5 2 5 5"/></svg></div><h3>Team & Task Assignment</h3><p>Randomly split groups into teams, assign presentation order, or pick who goes first — no arguments, no bias.</p></div>
+        <div class="ic aos"><div class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v-6M12 14 6 8m6 6 6-6M6 8V4h4M18 8V4h-4"/></svg></div><h3>Simulations & Sampling</h3><p>Feed random seeds into spreadsheets, scripts, or Monte Carlo-style simulations for testing and modeling.</p></div>
       </div>
     </div>
   </section>
 
   <!-- SEO CONTENT -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="wrap-sm">
       <div class="sec-label">About This Tool</div>
       <h2 class="sec-title">Free Random Number Generator Online</h2>
       <p style="color:var(--txt2);margin-bottom:14px;">Our <strong>free random number generator</strong> makes it easy to produce random integers in any range you specify. Whether you need a single random number between 1 and 100, a set of unique lottery numbers, or hundreds of values for data analysis — this tool handles it all without any installation or signup.</p>
       <p style="color:var(--txt2);margin-bottom:14px;">Unlike many online tools that use <code>Math.random()</code>, we use the <strong>Web Crypto API</strong> which provides cryptographically secure random values. This means the results are genuinely unpredictable and statistically unbiased — ideal for contests, research, and any situation where fairness matters.</p>
-      <p style="color:var(--txt2);margin-bottom:20px;">Use the quick presets for common ranges like 1–10, 1–100, or the lottery 6/49 format. Or enter any custom range, set how many numbers you want, enable the no-repeats mode, and click generate. It's that simple.</p>
+      <p style="color:var(--txt2);margin-bottom:14px;">Use the quick presets for common ranges like 1–10, 1–100, or the lottery 6/49 format. Or enter any custom range, set how many numbers you want, enable the no-repeats mode, and click generate. It's that simple.</p>
+      <p style="color:var(--txt2);margin-bottom:14px;">Choosing the right range depends on what you're picking numbers for. For a coin-flip-style decision, a range of 1–2 works fine. For a dice roll, use 1–6 (or the Dice preset). For raffles and lottery draws, match the range to the actual ticket pool — for example 1–49 for a standard 6/49 lottery — and turn on "No repeats" so the same ticket number is never drawn twice.</p>
+      <p style="color:var(--txt2);margin-bottom:14px;">The tool also keeps a running <strong>session history</strong> of your last 20 results, so if you generate several batches in a row — say, picking numbers for multiple raffle prizes — you can scroll back and see exactly what was drawn and when, without having to write anything down.</p>
+      <p style="color:var(--txt2);margin-bottom:20px;">Everything happens locally in your browser. No number you generate is sent to a server, logged, or stored anywhere outside your current session, so it's safe to use for private drawings, classroom exercises, or anything else where you'd rather not share your data.</p>
       <div class="tag-cloud">
         <span class="tag">random number generator</span>
         <span class="tag">number randomizer</span>
@@ -337,30 +408,42 @@
   </section>
 
   <!-- FAQ -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="wrap-sm">
       <div class="sec-label">FAQ</div>
       <h2 class="sec-title">Frequently Asked Questions</h2>
       <div class="faq-list">
         <div class="faq-item open">
-          <button class="faq-q">Is this random number generator truly random? <span class="faq-icon">+</span></button>
+          <button class="faq-q">Is this random number generator truly random? <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
           <div class="faq-a"><p>Yes. We use the Web Crypto API (<code>crypto.getRandomValues()</code>), which produces cryptographically secure random numbers that are statistically unbiased and unpredictable — much stronger than the standard <code>Math.random()</code>.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">What is the maximum range I can use? <span class="faq-icon">+</span></button>
+          <button class="faq-q">What is the maximum range I can use? <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
           <div class="faq-a"><p>You can enter any integer range, from large negative numbers to very large positive numbers (e.g. −1,000,000 to 1,000,000). The tool works with any valid integer inputs.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Can I generate unique numbers without repeats? <span class="faq-icon">+</span></button>
+          <button class="faq-q">Can I generate unique numbers without repeats? <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
           <div class="faq-a"><p>Yes — toggle on "No repeats" and every number in your batch will be unique. This is perfect for lottery draws, raffle tickets, or any situation requiring distinct values.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">How many numbers can I generate at once? <span class="faq-icon">+</span></button>
+          <button class="faq-q">How many numbers can I generate at once? <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
           <div class="faq-a"><p>You can generate up to 100 numbers per click. For unique mode, the count is automatically capped at the size of your range (e.g. range 1–10 allows max 10 unique numbers).</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Is this tool free to use? <span class="faq-icon">+</span></button>
+          <button class="faq-q">Is this tool free to use? <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
           <div class="faq-a"><p>100% free, no signup, no limits. Use it as many times as you like on any device including phones and tablets.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Does this work on mobile phones and tablets? <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+          <div class="faq-a"><p>Yes. The layout is fully responsive and the buttons and inputs are sized for touch, so it works the same way on phones, tablets, laptops, and desktops.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can I generate negative random numbers? <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+          <div class="faq-a"><p>Yes. Set the minimum field to a negative value, such as −100, and any maximum you like. The generator supports the full integer range from −999,999,999 to 999,999,999.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Is any of my data collected or tracked? <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+          <div class="faq-a"><p>No. Number generation happens entirely in your browser. Your inputs and results are never sent to a server, and your history clears automatically when you close or refresh the page.</p></div>
         </div>
       </div>
     </div>
@@ -492,9 +575,9 @@
       });
 
       function updateGenBtn() {
-        document.getElementById('genBtn').textContent = count === 1
-          ? '⚡ Generate Random Number'
-          : `⚡ Generate ${count} Random Numbers`;
+        document.getElementById('genBtnLabel').textContent = count === 1
+          ? 'Generate Random Number'
+          : `Generate ${count} Random Numbers`;
       }
 
       // ── Presets ──
@@ -514,12 +597,15 @@
       document.getElementById('genAgainBtn').addEventListener('click', generate);
 
       // ── Copy ──
+      const copyIconSVG = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+      const checkIconSVG = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 12 9 17 20 6"/></svg>';
+
       document.getElementById('copyBtn').addEventListener('click', () => {
         if (!history.length) return;
         navigator.clipboard.writeText(history[0].nums.join(', ')).then(() => {
           const btn = document.getElementById('copyBtn');
-          btn.textContent = '✅ Copied!';
-          setTimeout(() => { btn.textContent = '📋 Copy'; }, 2000);
+          btn.innerHTML = checkIconSVG + '<span id="copyBtnLabel">Copied!</span>';
+          setTimeout(() => { btn.innerHTML = copyIconSVG + '<span id="copyBtnLabel">Copy</span>'; }, 2000);
         });
       });
 
