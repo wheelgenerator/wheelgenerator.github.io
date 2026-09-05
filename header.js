@@ -36,6 +36,19 @@ const HeaderComponent = {
             <li role="none"><a href="/#how-it-works" class="nav-link" role="menuitem">How It Works</a></li>
             <li role="none"><a href="/#faq" class="nav-link" role="menuitem">FAQ</a></li>
             <li role="none"><a href="/blog" class="nav-link" role="menuitem">Blog</a></li>
+            <li class="has-dropdown lang-dropdown" role="none">
+              <a href="#" class="nav-link lang-link" role="menuitem" aria-haspopup="true" aria-expanded="false">
+                🌐 <span class="current-lang">EN</span> <span class="arrow">▾</span>
+              </a>
+              <ul class="dropdown" role="menu">
+                <li role="none"><a href="/" role="menuitem" data-lang="en">English</a></li>
+                <li role="none"><a href="/de/" role="menuitem" data-lang="de">Deutsch</a></li>
+                <li role="none"><a href="/es/" role="menuitem" data-lang="es">Español</a></li>
+                <li role="none"><a href="/fr/" role="menuitem" data-lang="fr">Français</a></li>
+                <li role="none"><a href="/it/" role="menuitem" data-lang="it">Italiano</a></li>
+                <li role="none"><a href="/id/" role="menuitem" data-lang="id">Bahasa Indonesia</a></li>
+              </ul>
+            </li>
           </ul>
           <a href="/#wheel-app" class="cta-btn">Spin Now</a>
         </div>
@@ -48,12 +61,12 @@ const HeaderComponent = {
     // Get DOM references
     const toggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
-    const dropdownLink = header.querySelector('.has-dropdown > a');
-    const dropdown = header.querySelector('.dropdown');
+    const dropdownLinks = header.querySelectorAll('.has-dropdown > a');
 
     // Mobile menu toggle
+    let toggleNav;
     if (toggle && navLinks) {
-      const toggleNav = () => {
+      toggleNav = () => {
         const isOpen = navLinks.classList.toggle('open');
         toggle.setAttribute('aria-expanded', String(isOpen));
         toggle.classList.toggle('active', isOpen);
@@ -65,11 +78,13 @@ const HeaderComponent = {
       // Close nav when clicking a link
       navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', (e) => {
-          if (link === dropdownLink && window.innerWidth <= 700) {
+          const parentDropdown = link.closest('.has-dropdown');
+          if (parentDropdown && link === parentDropdown.querySelector(':scope > a') && window.innerWidth <= 700) {
             e.preventDefault();
+            const dropdown = parentDropdown.querySelector('.dropdown');
             const isExpanded = link.getAttribute('aria-expanded') === 'true';
             link.setAttribute('aria-expanded', String(!isExpanded));
-            dropdown.classList.toggle('open', !isExpanded);
+            dropdown?.classList.toggle('open', !isExpanded);
             return;
           }
           
@@ -91,10 +106,11 @@ const HeaderComponent = {
       });
     }
 
-    // Handle dropdown
-    if (dropdownLink && dropdown) {
+    // Handle dropdowns (including language selector)
+    dropdownLinks.forEach(dropdownLink => {
       const parent = dropdownLink.closest('.has-dropdown');
-      
+      const dropdown = parent?.querySelector('.dropdown');
+
       parent?.addEventListener('mouseenter', () => {
         if (window.innerWidth > 700) {
           dropdownLink.setAttribute('aria-expanded', 'true');
@@ -112,9 +128,21 @@ const HeaderComponent = {
           e.preventDefault();
           const isExpanded = dropdownLink.getAttribute('aria-expanded') === 'true';
           dropdownLink.setAttribute('aria-expanded', String(!isExpanded));
-          dropdown.classList.toggle('open', !isExpanded);
+          dropdown?.classList.toggle('open', !isExpanded);
         }
       });
+    });
+
+    // Detect current path and update current-lang label
+    const path = window.location.pathname;
+    const currentLangLabel = header.querySelector('.current-lang');
+    if (currentLangLabel) {
+      if (path.startsWith('/de/')) currentLangLabel.textContent = 'DE';
+      else if (path.startsWith('/es/')) currentLangLabel.textContent = 'ES';
+      else if (path.startsWith('/fr/')) currentLangLabel.textContent = 'FR';
+      else if (path.startsWith('/it/')) currentLangLabel.textContent = 'IT';
+      else if (path.startsWith('/id/')) currentLangLabel.textContent = 'ID';
+      else currentLangLabel.textContent = 'EN';
     }
 
     // Sticky header
@@ -139,8 +167,8 @@ const HeaderComponent = {
         toggle?.setAttribute('aria-expanded', 'false');
         toggle?.classList.remove('active');
         document.body.classList.remove('menu-open');
-        dropdown?.classList.remove('open');
-        dropdownLink?.setAttribute('aria-expanded', 'false');
+        header.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+        dropdownLinks.forEach(dl => dl.setAttribute('aria-expanded', 'false'));
       }
     };
 
@@ -149,7 +177,7 @@ const HeaderComponent = {
     header._cleanup = () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
-      toggle?.removeEventListener('click', toggleNav);
+      if (toggleNav && toggle) toggle.removeEventListener('click', toggleNav);
     };
 
     return header;
