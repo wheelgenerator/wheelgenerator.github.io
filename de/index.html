@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8148292690390336" crossorigin="anonymous"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VBZ3RM362W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-VBZ3RM362W');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="description" content="Glücksrad Generator — Kostenloses interaktives Glücksrad für zufällige Entscheidungen, Namensauswahl, Ja/Nein, Zahlen, Farben und eigene Optionen.">
+  <meta name="keywords" content="glücksrad, glücksrad drehen, zufallsgenerator wheel, namen ziehen glücksrad, zufallsgenerator rad, ja nein rad, entscheidungsrad, glücksrad erstellen">
+  <meta name="author" content="WheelGenerator">
+  <meta name="publisher" content="WheelGenerator">
+  <meta name="robots" content="index, follow">
+
+  <!-- Hreflang Tags -->
+  <link rel="canonical" href="https://wheelgenerator.github.io/de/">
+  <link rel="alternate" hreflang="en" href="https://wheelgenerator.github.io/" />
+  <link rel="alternate" hreflang="de" href="https://wheelgenerator.github.io/de/" />
+  <link rel="alternate" hreflang="es" href="https://wheelgenerator.github.io/es/" />
+  <link rel="alternate" hreflang="it" href="https://wheelgenerator.github.io/it/" />
+  <link rel="alternate" hreflang="fr" href="https://wheelgenerator.github.io/fr/" />
+  <link rel="alternate" hreflang="id" href="https://wheelgenerator.github.io/id/" />
+  <link rel="alternate" hreflang="x-default" href="https://wheelgenerator.github.io/" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <title>Glücksrad Drehen — Kostenloser Glücksrad Generator & Zufallsrad</title>
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/style.css">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="WheelGenerator — Glücksrad & Zufallsgenerator">
+  <meta property="og:description" content="Erstelle dein eigenes Glücksrad, drehe es für Entscheidungen, ziehe Gewinner oder habe einfach Spaß. Vollständig kostenlos und anpassbar.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wheelgenerator.github.io/de/">
+  <meta property="og:image" content="https://wheelgenerator.github.io/og-wheel.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://wheelgenerator.github.io/de/#website",
+  "url": "https://wheelgenerator.github.io/de/",
+  "name": "WheelGenerator",
+  "description": "Kostenloses interaktives Glücksrad für zufällige Entscheidungen, Namensauswahl, Ja/Nein, Zahlen, Farben und eigene Optionen.",
+  "inLanguage": "de"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "@id": "https://wheelgenerator.github.io/de/#webapplication",
+  "url": "https://wheelgenerator.github.io/de/",
+  "name": "WheelGenerator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Benötigt HTML5 Canvas und JavaScript-Unterstützung.",
+  "permissions": "Keine",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Kostenloses interaktives Glücksrad für zufällige Entscheidungen, Namensauswahl, Ja/Nein, Zahlen, Farben und eigene Optionen."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://wheelgenerator.github.io/de/#faq",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ist das Glücksrad wirklich zufällig?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja! Unser Glücksrad verwendet physikbasierte Zufallsgeschwindigkeit und unparteiische Winkelerkennung. Jede Drehung ist unabhängig und fair."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kann ich das Rad auf meinem Smartphone nutzen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolut. Das Rad ist vollständig responsiv. Sie können durch Tippen auf das Canvas oder den Drehen-Button drehen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie viele Optionen kann ich hinzufügen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sie können mehr als 100 Einträge hinzufügen; die Leistung bleibt flüssig. Bei sehr langen Listen passt sich die Textgröße automatisch an."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Muss ich ein Konto erstellen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Keine Registrierung erforderlich. Alles funktioniert direkt in Ihrem Browser und Ihre Daten bleiben privat."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kann ich ein Ergebnis nach dem Drehen entfernen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja! Aktivieren Sie 'Eintrag nach Drehung entfernen' in den Einstellungen, um den Gewinner automatisch zu löschen."
+      }
+    }
+  ]
+}
+</script>
+
+<div id="header-root"></div>
+  
+<main>
+  <!-- Hero Section -->
+  <section class="hero" aria-label="Hero Einführung">
+    <div class="hero-content">
+      <span class="hero-badge">✨ Kostenlose & unbegrenzte Drehungen ✨</span>
+      <h1>Glücksrad drehen & <span>Entscheidungen treffen</span></h1>
+      <p class="hero-sub">Der ultimative Zufallsgenerator – passe dein Rad an, drehe es und lass das Schicksal entscheiden. Perfekt für Gewinnspiele, Spiele oder Unterricht.</p>
+      <div class="hero-actions">
+        <a href="#wheel-app" class="btn-primary">🎡 Jetzt Drehen →</a>
+        <a href="#wheel-types" class="btn-secondary">✨ Räder Entdecken</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Drehungen</div></div>
+        <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Eigene Räder</div></div>
+        <div class="stat"><div class="stat-num">⭐ 5</div><div class="stat-label">Rad-Typen</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wheel Application -->
+  <section id="wheel-app" class="section" aria-label="Glücksrad Anwendung">
+    <div class="container">
+      <div class="wheel-app-grid">
+        <div class="wheel-stage">
+          <div class="wheel-canvas-wrap">
+            <canvas id="mainWheel" width="500" height="500" aria-label="Interaktives Glücksrad" role="img"></canvas>
+            <div id="resultBox" class="result-box">
+              <div class="result-label">🎉 GEWINNER 🎉</div>
+              <div id="resultText" class="result-value">—</div>
+            </div>
+          </div>
+          <div class="wheel-controls">
+            <button id="spinBtn" class="spin-primary">🔘 GLÜCKSRAD DREHEN</button>
+            <div class="wheel-toolbar">
+              <button id="soundToggle" class="toolbar-btn" title="Ton ein-/ausschalten">🔊</button>
+              <button id="fullscreenBtn" class="toolbar-btn icon-btn" title="Vollbildmodus">⛶</button>
+              <button id="shareBtn" class="toolbar-btn" title="Rad teilen">🔗 Rad Teilen</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="wheel-panel">
+          <div class="panel-tabs">
+            <button class="panel-tab active" data-panel="entries">📋 Einträge</button>
+            <button class="panel-tab" data-panel="themes">🎨 Designs</button>
+            <button class="panel-tab" data-panel="history">📜 Verlauf</button>
+            <button class="panel-tab" data-panel="settings">⚙️ Optionen</button>
+          </div>
+          
+          <!-- Entries Panel -->
+          <div id="panel-entries" class="panel-body active">
+            <div class="entries-header">
+              <div class="entries-count" id="entryCount">8</div>
+              <div class="entries-actions">
+                <button id="clearAllBtn" class="action-btn-sm" title="Alle löschen">🗑️ Leeren</button>
+                <button id="sortBtn" class="action-btn-sm" title="A-Z sortieren">🔤 Sortieren</button>
+                <button id="shuffleBtn" class="action-btn-sm" title="Mischen">🔄 Mischen</button>
+                <button id="openBulkBtn" class="action-btn-sm" title="Mehrere hinzufügen">📋 Liste</button>
+              </div>
+            </div>
+            <div id="entriesList" class="entries-list"></div>
+            <div class="entry-input-row">
+              <input type="text" id="newEntryInput" class="entry-input" placeholder="Neue Option hinzufügen..." aria-label="Neuer Eintrag">
+              <button id="addEntryBtn" class="add-btn">+ Hinzufügen</button>
+            </div>
+          </div>
+
+          <!-- Themes Panel -->
+          <div id="panel-themes" class="panel-body">
+            <div class="themes-grid">
+              <button class="theme-btn active" data-theme="classic"><span class="theme-swatch"><span style="background:#FF6B6B"></span><span style="background:#4ECDC4"></span><span style="background:#FFE66D"></span></span> Klassisch</button>
+              <button class="theme-btn" data-theme="neon"><span class="theme-swatch"><span style="background:#FF0080"></span><span style="background:#00FF41"></span><span style="background:#0080FF"></span></span> Neon</button>
+              <button class="theme-btn" data-theme="pastel"><span class="theme-swatch"><span style="background:#FFB3BA"></span><span style="background:#BAFFC9"></span><span style="background:#BAE1FF"></span></span> Pastell</button>
+              <button class="theme-btn" data-theme="dark"><span class="theme-swatch"><span style="background:#2D3436"></span><span style="background:#636E72"></span><span style="background:#74B9FF"></span></span> Dunkel</button>
+              <button class="theme-btn" data-theme="rainbow"><span class="theme-swatch"><span style="background:#FF0000"></span><span style="background:#00FF00"></span><span style="background:#0000FF"></span></span> Regenbogen</button>
+              <button class="theme-btn" data-theme="earth"><span class="theme-swatch"><span style="background:#8B4513"></span><span style="background:#A0522D"></span><span style="background:#DEB887"></span></span> Erde</button>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text3); margin-top: 16px;">Wählen Sie ein Farbdesign passend zu Ihrer Stimmung.</p>
+          </div>
+
+          <!-- History Panel -->
+          <div id="panel-history" class="panel-body">
+            <div id="historyList" class="history-list-container"><p class="no-history">Noch keine Drehungen. Drehe das Rad!</p></div>
+            <button id="clearHistoryBtn" class="action-btn-sm" style="background:transparent; margin-top: 8px;">🗑️ Verlauf löschen</button>
+          </div>
+
+          <!-- Settings Panel -->
+          <div id="panel-settings" class="panel-body">
+            <div class="settings-row">
+              <div><div class="settings-label">🔇 Eintrag nach Drehung entfernen</div><div class="settings-desc">Gewinner wird automatisch entfernt</div></div>
+              <label class="toggle-switch"><input type="checkbox" id="removeAfterSpin"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="settings-row">
+              <div><div class="settings-label">🎵 Soundeffekte</div><div class="settings-desc">Dreh- und Gewinnsounds</div></div>
+              <label class="toggle-switch"><input type="checkbox" id="soundSettingToggle" checked><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preset Wheels Section -->
+  <section class="section section-alt" id="preset-wheels" aria-label="Vordefinierte Räder">
+    <div class="container">
+      <span class="section-label">⚡ Schnellstart</span>
+      <h2 class="section-title">Bereitstehende Vorlagen</h2>
+      <p class="section-desc">Wähle aus beliebten Kategorien und starte sofort. Oder erstelle dein eigenes Rad.</p>
+
+      <div class="presets-grid">
+        <button class="preset-btn" data-preset="food">
+          <div class="preset-icon"><img src="/images/slice.png" alt="Essen"></div> 
+          Essen Auswählen
+        </button>
+        
+        <button class="preset-btn" data-preset="yesno">
+          <div class="preset-icon"><img src="/images/emoji.png" alt="Entscheidung"></div> 
+          Ja/Nein Orakel
+        </button>
+        
+        <button class="preset-btn" data-preset="numbers">
+          <div class="preset-icon"><img src="/images/numbers.png" alt="Zahlen"></div> 
+          Zahlenrad
+        </button>
+        
+        <button class="preset-btn" data-preset="colors">
+          <div class="preset-icon"><img src="/images/colors.png" alt="Farben"></div> 
+          Farbenrad
+        </button>
+        
+        <button class="preset-btn" data-preset="days">
+          <div class="preset-icon"><img src="/images/calender.png" alt="Kalender"></div> 
+          Wochentage
+        </button>
+        
+        <button class="preset-btn" data-preset="truth">
+          <div class="preset-icon"><img src="/images/truth.png" alt="Würfel"></div> 
+          Wahrheit oder Pflicht
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wheel Types Section -->
+  <section id="wheel-types" class="section" aria-label="Verschiedene Rad-Typen">
+    <div class="container">
+      <div class="section-label">🎡 Varianten Entdecken</div>
+      <h2 class="section-title">Finde das perfekte Glücksrad für deine Bedürfnisse</h2>
+      <div class="wheel-types-tabs">
+        <button class="wheel-type-tab active" data-type="random">Zufallsgenerator</button>
+        <button class="wheel-type-tab" data-type="yesno">Ja / Nein</button>
+        <button class="wheel-type-tab" data-type="number">Zahlenrad</button>
+        <button class="wheel-type-tab" data-type="color">Farbenrad</button>
+        <button class="wheel-type-tab" data-type="custom">Eigene Optionen</button>
+      </div>
+      <div class="wheel-type-panels">
+        <div id="panel-random" class="wheel-type-panel active">
+          <div class="type-cards-grid">
+            <div class="type-card"><div class="type-card-icon">🎲</div><h3>Ultimativer Zufallsgenerator</h3><p>Perfekt zur Gewinnerziehung, Namensauswahl oder für Schulaktivitäten.</p><a href="#wheel-app" class="type-card-link">Jetzt testen →</a></div>
+            <div class="type-card"><div class="type-card-icon">🏆</div><h3>Gewinnspiel Spinner</h3><p>Wähle glückliche Gewinner für Wettbewerbe oder Verlosungen.</p><a href="#wheel-app" class="type-card-link">Gewinnspiel drehen →</a></div>
+            <div class="type-card"><div class="type-card-icon">👥</div><h3>Team Auswähler</h3><p>Aufgaben zuweisen, Teams aufteilen oder Gruppenleiter bestimmen.</p><a href="#wheel-app" class="type-card-link">Teams wählen →</a></div>
+          </div>
+        </div>
+        <div id="panel-yesno" class="wheel-type-panel"><div class="type-cards-grid"><div class="type-card"><div class="type-card-icon">✅</div><h3>Ja / Nein Entscheidungsrad</h3><p>Lass das Rad Ja, Nein oder Vielleicht entscheiden – schnelle Antworte.</p><a href="#wheel-app" class="type-card-link">Ja/Nein nutzen →</a></div></div></div>
+        <div id="panel-number" class="wheel-type-panel"><div class="type-cards-grid"><div class="type-card"><div class="type-card-icon">🔢</div><h3>Zahlen-Generator</h3><p>Drehen Sie für Zufallszahlen zwischen 1–10, 1–100 oder eigenen Bereichen.</p><a href="#wheel-app" class="type-card-link">Zahlenrad →</a></div></div></div>
+        <div id="panel-color" class="wheel-type-panel"><div class="type-cards-grid"><div class="type-card"><div class="type-card-icon">🌈</div><h3>Farbauswahl-Rad</h3><p>Ideal für Design-Inspirationen, Spiele oder zufällige Farbwahl.</p><a href="#wheel-app" class="type-card-link">Farbe wählen →</a></div></div></div>
+        <div id="panel-custom" class="wheel-type-panel"><div class="type-cards-grid"><div class="type-card"><div class="type-card-icon">✏️</div><h3>Vollständig Anpassbar</h3><p>Füge eigene Beschriftungen, Kategorien und Namen hinzu.</p><a href="#wheel-app" class="type-card-link">Rad erstellen →</a></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="section section-alt" aria-label="Hauptfunktionen">
+    <div class="container">
+      <span class="section-label">✨ Warum uns wählen</span>
+      <h2 class="section-title">Alles, was du von einem Glücksrad brauchst</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon"><img src="/images/themes.png" alt="Designs"></div>
+          <h3>Eigene Designs</h3>
+          <p>Klassisch, Neon, Pastell, Dunkelmodus – personalisiere dein Erlebnis.</p>
+        </div>
+        
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon"><img src="/images/history1.png" alt="Verlauf"></div>
+          <h3>Echter Drehverlauf</h3>
+          <p>Verfolge vergangene Ergebnisse und verliere nie deine Entscheidungen.</p>
+        </div>
+        
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon"><img src="/images/sounds.png" alt="Sounds"></div>
+          <h3>Angenehme Sounds</h3>
+          <p>Optionale Soundeffekte und Fanfaren beim Gewinnen.</p>
+        </div>
+        
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon"><img src="/images/mobile.png" alt="Mobil"></div>
+          <h3>Mobilfreundlich</h3>
+          <p>Vollständig optimiert – drehe einfach per Tippen auf jedem Gerät.</p>
+        </div>
+        
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon"><img src="/images/import.png" alt="Import"></div>
+          <h3>Massenimport</h3>
+          <p>Füge Dutzende Einträge gleichzeitig durch Einfügen hinzu.</p>
+        </div>
+        
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon"><img src="/images/share.png" alt="Teilen"></div>
+          <h3>Glücksrad Teilen</h3>
+          <p>Teile einen eindeutigen Link deines individuellen Glücksrads mit Freunden.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="section" aria-label="Schritt für Schritt Anleitung">
+    <div class="container">
+      <span class="section-label">🚀 3 Einfache Schritte</span>
+      <h2 class="section-title">Glücksrad in Sekundenschnelle drehen</h2>
+      <div class="how-grid">
+        <div class="how-step animate-on-scroll"><div class="step-num">1</div><h3>Einträge anpassen</h3><p>Optionen hinzufügen – von Essen über Namen bis hin zu Zahlen.</p></div>
+        <div class="how-step animate-on-scroll"><div class="step-num">2</div><h3>Design wählen</h3><p>Wähle einen Stil, der zu deiner Stimmung passt, oder nutze Vorlagen.</p></div>
+        <div class="how-step animate-on-scroll"><div class="step-num">3</div><h3>Drehen & Freuen!</h3><p>Sieh zu, wie das Rad dreht, zufällig landet und Konfetti anzeigt.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section id="use-cases" class="section section-alt" aria-label="Beliebte Anwendungsbereiche">
+    <div class="container">
+      <span class="section-label">💡 Für jeden Anlass</span>
+      <h2 class="section-title">Von Millionen Menschen genutzt</h2>
+      <div class="use-cases-grid">
+        <div class="use-case-card"><div class="use-case-icon">🏫</div><h3>Schule & Unterricht</h3><p>Schüler auswählen, Fragen stellen.</p></div>
+        <div class="use-case-card"><div class="use-case-icon">🎁</div><h3>Gewinnspiele</h3><p>Gewinner fair ziehen.</p></div>
+        <div class="use-case-card"><div class="use-case-icon">🍕</div><h3>Was essen?</h3><p>Mittagessen oder Restaurant wählen.</p></div>
+        <div class="use-case-card"><div class="use-case-icon">🎮</div><h3>Spieleabend</h3><p>Wahrheit oder Pflicht, Aufgaben.</p></div>
+        <div class="use-case-card"><div class="use-case-icon">🧠</div><h3>Brainstorming</h3><p>Zufallsthemen generieren.</p></div>
+        <div class="use-case-card"><div class="use-case-icon">📝</div><h3>To-Do Listen</h3><p>Nächste Aufgabe auswählen.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO & Additional Content -->
+  <section class="section content-section" aria-label="Über den Glücksrad Generator">
+    <div class="container">
+      <div class="content-grid">
+        <div class="content-block animate-on-scroll">
+          <h3>Warum WheelGenerator das beste Glücksrad-Tool ist</h3>
+          <p>Im Gegensatz zu anderen Zufallsgeneratoren bietet WheelGenerator unbegrenzte Anpassungsmöglichkeiten, verschiedene Farbschemata, Soundeffekte, Verlaufstracking und eine flüssige Animations-Engine. Ohne Registrierung, völlig kostenlos und direkt im Browser nutzbar.</p>
+          <div class="content-tags">
+            <span class="tag">kostenloses glücksrad</span><span class="tag">namen zieher</span><span class="tag">entscheidungsfinder</span><span class="tag">zufallsrad</span>
+          </div>
+        </div>
+        <div class="content-block animate-on-scroll">
+          <h3>Wie erstelle ich ein eigenes Glücksrad?</h3>
+          <p>Tippe oder füge deine Optionen im Feld 'Einträge' ein, wähle ein Design und drücke auf Drehen. Du kannst Einträge sortieren, mischen oder als Liste einfügen. Nutze den Teilen-Button, um dein Rad zu versenden.</p>
+          <div class="content-tags">
+            <span class="tag">glücksrad generator</span><span class="tag">ja nein rad</span><span class="tag">zahlen glücksrad</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="section section-alt" aria-label="Häufig gestellte Fragen">
+    <div class="container">
+      <span class="section-label">❓ Hilfe nötig?</span>
+      <h2 class="section-title">Häufig gestellte Fragen</h2>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-question">Ist das Glücksrad wirklich zufällig? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Ja! Unser Glücksrad verwendet physikbasierte Zufallsgeschwindigkeit und unparteiische Winkelerkennung. Jede Drehung ist unabhängig und fair.</p></div></div>
+        <div class="faq-item"><button class="faq-question">Kann ich das Rad auf meinem Smartphone nutzen? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Absolut. Das Rad ist vollständig responsiv. Sie können durch Tippen auf das Canvas oder den Drehen-Button drehen.</p></div></div>
+        <div class="faq-item"><button class="faq-question">Wie viele Optionen kann ich hinzufügen? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Sie können mehr als 100 Einträge hinzufügen; die Leistung bleibt flüssig. Bei sehr langen Listen passt sich die Textgröße automatisch an.</p></div></div>
+        <div class="faq-item"><button class="faq-question">Muss ich ein Konto erstellen? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Keine Registrierung erforderlich. Alles funktioniert direkt in Ihrem Browser und Ihre Daten bleiben privat.</p></div></div>
+        <div class="faq-item"><button class="faq-question">Kann ich ein Ergebnis nach dem Drehen entfernen? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Ja! Aktivieren Sie 'Eintrag nach Drehung entfernen' in den Einstellungen, um den Gewinner automatisch zu löschen.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <div class="cta-banner">
+    <h2>Bereit, das Rad entscheiden zu lassen?</h2>
+    <p>Erstelle jetzt dein eigenes Glücksrad — schnell und unterhaltsam.</p>
+    <a href="#wheel-app" class="btn-white">🎡 Glücksrad Drehen</a>
+  </div>
+</main>
+
+<!-- Modals -->
+<div id="bulkModal" class="modal-overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-header"><h3>📋 Mehrere Einträge hinzufügen</h3><button id="closeBulkModal" class="modal-close" aria-label="Schließen">✕</button></div>
+    <p class="modal-desc">Geben Sie eine Option pro Zeile ein. Fügen Sie Ihre Liste unten ein:</p>
+    <textarea id="bulkInput" rows="6" placeholder="Pizza&#10;Tacos&#10;Ramen&#10;Sushi"></textarea>
+    <button id="bulkAddBtn" class="btn-primary" style="width:100%">Alle hinzufügen & Schließen</button>
+  </div>
+</div>
+
+<div id="footer-root"></div>  
+
+<script src="/header.js"></script>
+<script src="/footer.js"></script>
+<script src="/wheel.js"></script>
+<script type="module" src="/app.js"></script>
+
+<script>
+  window.updateEntry = null;
+  window.removeEntry = null;
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.panel-tab');
+    const panels = {
+      entries: document.getElementById('panel-entries'),
+      themes: document.getElementById('panel-themes'),
+      history: document.getElementById('panel-history'),
+      settings: document.getElementById('panel-settings')
+    };
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.panel;
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        Object.values(panels).forEach(p => p?.classList.remove('active'));
+        if (target && panels[target]) panels[target].classList.add('active');
+      });
+    });
+    const soundSettingToggle = document.getElementById('soundSettingToggle');
+    const soundToolbarBtn = document.getElementById('soundToggle');
+    if (soundSettingToggle && soundToolbarBtn) {
+      soundSettingToggle.addEventListener('change', (e) => {
+        const isChecked = e.target.checked;
+        if (soundToolbarBtn) {
+          if (!isChecked) soundToolbarBtn.classList.add('muted');
+          else soundToolbarBtn.classList.remove('muted');
+          soundToolbarBtn.textContent = isChecked ? '🔊' : '🔇';
+          const wheelEvent = new CustomEvent('soundToggleGlobal', { detail: { enabled: isChecked } });
+          document.dispatchEvent(wheelEvent);
+        }
+      });
+      soundToolbarBtn.addEventListener('click', () => {
+        const currentlyMuted = soundToolbarBtn.classList.contains('muted');
+        soundSettingToggle.checked = currentlyMuted ? false : true;
+        soundSettingToggle.dispatchEvent(new Event('change'));
+      });
+    }
+    const fsBtn = document.getElementById('fullscreenBtn');
+    if (fsBtn) {
+      fsBtn.addEventListener('click', () => {
+        const wheelSection = document.getElementById('wheel-app');
+        if (!document.fullscreenElement) wheelSection?.requestFullscreen?.().catch(e=>{});
+        else document.exitFullscreen?.();
+      });
+    }
+  });
+</script>
+</body>
+</html>
